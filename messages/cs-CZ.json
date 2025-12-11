@@ -2067,6 +2067,8 @@
     "timestamp": "Časové razítko",
     "accessLogs": "Protokoly přístupu",
     "exportCsv": "Exportovat CSV",
+    "exportError": "Unknown error when exporting CSV",
+    "exportCsvTooltip": "Within Time Range",
     "actorId": "ID aktéra",
     "allowedByRule": "Povoleno pomocí pravidla",
     "allowedNoAuth": "Povoleno bez ověření",
