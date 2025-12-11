@@ -2067,6 +2067,8 @@
     "timestamp": "时间戳",
     "accessLogs": "访问日志",
     "exportCsv": "导出CSV",
+    "exportError": "Unknown error when exporting CSV",
+    "exportCsvTooltip": "Within Time Range",
     "actorId": "执行者ID",
     "allowedByRule": "根据规则允许",
     "allowedNoAuth": "无认证",
