@@ -2067,6 +2067,8 @@
     "timestamp": "Tidsstempel",
     "accessLogs": "Tilgangslogger (Automatic Translation)",
     "exportCsv": "Eksportere CSV",
+    "exportError": "Unknown error when exporting CSV",
+    "exportCsvTooltip": "Within Time Range",
     "actorId": "Skuespiller ID",
     "allowedByRule": "Tillatt etter regel",
     "allowedNoAuth": "Tillatt Ingen Auth",
