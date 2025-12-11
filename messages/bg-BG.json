@@ -2067,6 +2067,8 @@
     "timestamp": "Отбелязано време",
     "accessLogs": "Достъп до логове",
     "exportCsv": "Експортиране в CSV",
+    "exportError": "Unknown error when exporting CSV",
+    "exportCsvTooltip": "Within Time Range",
     "actorId": "ID на извършващия",
     "allowedByRule": "Разрешено от правило",
     "allowedNoAuth": "Разрешено без удостоверение",
