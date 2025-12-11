@@ -2067,6 +2067,8 @@
     "timestamp": "Artikeldatering",
     "accessLogs": "Toegang tot logboek",
     "exportCsv": "Exporteren als CSV",
+    "exportError": "Unknown error when exporting CSV",
+    "exportCsvTooltip": "Within Time Range",
     "actorId": "Acteur ID",
     "allowedByRule": "Toegestaan door regel",
     "allowedNoAuth": "Toegestaan geen authenticatie",
