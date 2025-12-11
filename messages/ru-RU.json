@@ -2067,6 +2067,8 @@
     "timestamp": "Отметка времени",
     "accessLogs": "Журналы доступа",
     "exportCsv": "Экспорт CSV",
+    "exportError": "Unknown error when exporting CSV",
+    "exportCsvTooltip": "Within Time Range",
     "actorId": "ID актера",
     "allowedByRule": "Разрешено правилом",
     "allowedNoAuth": "Разрешено без авторизации",
