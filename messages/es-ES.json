@@ -2272,5 +2272,8 @@
     "remoteExitNodeRegenerateAndDisconnectWarning": "Esto regenerará las credenciales y desconectará inmediatamente el nodo de salida remoto. El nodo de salida remoto tendrá que reiniciarse con las nuevas credenciales.",
     "remoteExitNodeRegenerateCredentialsConfirmation": "¿Estás seguro de que quieres regenerar las credenciales para este nodo de salida remoto?",
     "remoteExitNodeRegenerateCredentialsWarning": "Esto regenerará las credenciales. El nodo de salida remoto permanecerá conectado hasta que lo reinicie manualmente y utilice las nuevas credenciales.",
-    "agent": "Agente"
+    "agent": "Agente",
+    "personalUseOnly": "Personal Use Only",
+    "loginPageLicenseWatermark": "This instance is licensed for personal use only.",
+    "instanceIsUnlicensed": "This instance is unlicensed."
 }
