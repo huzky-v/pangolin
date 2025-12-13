@@ -2272,5 +2272,8 @@
     "remoteExitNodeRegenerateAndDisconnectWarning": "Spowoduje to regenerację danych logowania i natychmiastowe odłączenie zdalnego węzła wyjścia. Węzeł zdalnego wyjścia będzie musiał zostać ponownie uruchomiony z nowymi danymi logowania.",
     "remoteExitNodeRegenerateCredentialsConfirmation": "Czy na pewno chcesz wygenerować dane logowania dla tego węzła zdalnego wyjścia?",
     "remoteExitNodeRegenerateCredentialsWarning": "Spowoduje to regenerację poświadczeń. Serwer wyjścia pozostanie podłączony do momentu ręcznego ponownego uruchomienia i użycia nowych poświadczeń.",
-    "agent": "Agent"
+    "agent": "Agent",
+    "personalUseOnly": "Personal Use Only",
+    "loginPageLicenseWatermark": "This instance is licensed for personal use only.",
+    "instanceIsUnlicensed": "This instance is unlicensed."
 }
