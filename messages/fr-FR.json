@@ -2272,5 +2272,8 @@
     "remoteExitNodeRegenerateAndDisconnectWarning": "Cela va régénérer les identifiants et déconnecter immédiatement le noeud de sortie distant. Le noeud de sortie distant devra être redémarré avec les nouveaux identifiants.",
     "remoteExitNodeRegenerateCredentialsConfirmation": "Êtes-vous sûr de vouloir régénérer les informations d'identification pour ce noeud de sortie distant ?",
     "remoteExitNodeRegenerateCredentialsWarning": "Cela va régénérer les identifiants. Le noeud de sortie distant restera connecté jusqu'à ce que vous le redémarriez manuellement et utilisez les nouveaux identifiants.",
-    "agent": "Agent"
+    "agent": "Agent",
+    "personalUseOnly": "Personal Use Only",
+    "loginPageLicenseWatermark": "This instance is licensed for personal use only.",
+    "instanceIsUnlicensed": "This instance is unlicensed."
 }
