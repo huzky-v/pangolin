@@ -2272,5 +2272,8 @@
     "remoteExitNodeRegenerateAndDisconnectWarning": "Dette vil regenerere innloggingsdetaljene og umiddelbart koble fra den eksterne avkjøringnoden. Ekstern avkjøringsnode må startes på nytt med de nye opplysningene",
     "remoteExitNodeRegenerateCredentialsConfirmation": "Er du sikker på at du vil regenerere innloggingsene for denne eksterne avslutningen?",
     "remoteExitNodeRegenerateCredentialsWarning": "Dette vil regenerere legitimasjon. Ekstern avgang noden vil forbli tilkoblet inntil du manuelt gjenoppstarter den og bruker de nye legitimasjonene.",
-    "agent": "Agent"
+    "agent": "Agent",
+    "personalUseOnly": "Personal Use Only",
+    "loginPageLicenseWatermark": "This instance is licensed for personal use only.",
+    "instanceIsUnlicensed": "This instance is unlicensed."
 }
