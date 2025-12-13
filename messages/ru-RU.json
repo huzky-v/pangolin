@@ -2272,5 +2272,8 @@
     "remoteExitNodeRegenerateAndDisconnectWarning": "Это позволит восстановить учётные данные и немедленно отключить удаленный узел выхода. Удаленный узел выхода должен быть перезапущен с новыми учетными данными.",
     "remoteExitNodeRegenerateCredentialsConfirmation": "Вы уверены, что хотите восстановить учетные данные для этого удаленного выхода узла?",
     "remoteExitNodeRegenerateCredentialsWarning": "Это позволит восстановить учетные данные. Удалённый узел останется подключенным, пока вы не перезапустите его вручную и воспользуетесь новыми учетными данными.",
-    "agent": "Агент"
+    "agent": "Агент",
+    "personalUseOnly": "Personal Use Only",
+    "loginPageLicenseWatermark": "This instance is licensed for personal use only.",
+    "instanceIsUnlicensed": "This instance is unlicensed."
 }
