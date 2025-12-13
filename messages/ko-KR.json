@@ -2272,5 +2272,8 @@
     "remoteExitNodeRegenerateAndDisconnectWarning": "이 과정은 자격 증명을 다시 생성하고 원격 종료 노드와의 연결을 즉시 해제합니다. 원격 종료 노드는 새 자격 증명으로 다시 시작되어야 합니다.",
     "remoteExitNodeRegenerateCredentialsConfirmation": "이 원격 종료 노드에 대한 자격 증명을 다시 생성하시겠습니까?",
     "remoteExitNodeRegenerateCredentialsWarning": "이 과정은 자격 증명을 다시 생성합니다. 수동으로 다시 시작하고 새 자격 증명을 사용하기 전까지 원격 종료 노드는 연결된 상태로 유지됩니다.",
-    "agent": "에이전트"
+    "agent": "에이전트",
+    "personalUseOnly": "Personal Use Only",
+    "loginPageLicenseWatermark": "This instance is licensed for personal use only.",
+    "instanceIsUnlicensed": "This instance is unlicensed."
 }
