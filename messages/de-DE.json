@@ -2272,5 +2272,8 @@
     "remoteExitNodeRegenerateAndDisconnectWarning": "Dies wird die Anmeldeinformationen neu generieren und den Remote-Exit-Knoten sofort trennen. Der Remote-Exit-Knoten muss mit den neuen Anmeldeinformationen neu gestartet werden.",
     "remoteExitNodeRegenerateCredentialsConfirmation": "Sind Sie sicher, dass Sie die Zugangsdaten für diesen Remote-Exit-Knoten neu generieren möchten?",
     "remoteExitNodeRegenerateCredentialsWarning": "Dies wird die Anmeldeinformationen neu generieren. Der Remote-Exit-Knoten bleibt verbunden, bis Sie ihn manuell neu starten und die neuen Anmeldeinformationen verwenden.",
-    "agent": "Agent"
+    "agent": "Agent",
+    "personalUseOnly": "Personal Use Only",
+    "loginPageLicenseWatermark": "This instance is licensed for personal use only.",
+    "instanceIsUnlicensed": "This instance is unlicensed."
 }
