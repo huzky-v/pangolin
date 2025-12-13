@@ -2272,5 +2272,8 @@
     "remoteExitNodeRegenerateAndDisconnectWarning": "Toto obnoví přihlašovací údaje a okamžitě odpojí vzdálený výstupní uzel. Vzdálený výstupní uzel bude muset být restartován s novými přihlašovacími údaji.",
     "remoteExitNodeRegenerateCredentialsConfirmation": "Jste si jisti, že chcete obnovit přihlašovací údaje pro tento vzdálený výstupní uzel?",
     "remoteExitNodeRegenerateCredentialsWarning": "Toto obnoví přihlašovací údaje. Vzdálený výstupní uzel zůstane připojen, dokud jej ručně nerestartujete a nepoužijete nové přihlašovací údaje.",
-    "agent": "Agent"
+    "agent": "Agent",
+    "personalUseOnly": "Personal Use Only",
+    "loginPageLicenseWatermark": "This instance is licensed for personal use only.",
+    "instanceIsUnlicensed": "This instance is unlicensed."
 }
