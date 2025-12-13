@@ -2272,5 +2272,8 @@
     "remoteExitNodeRegenerateAndDisconnectWarning": "Dit zal de referenties regenereren en onmiddellijk de externe exit node ontkoppelen. Het externe exit node zal opnieuw moeten worden gestart met de nieuwe referenties.",
     "remoteExitNodeRegenerateCredentialsConfirmation": "Weet u zeker dat u de referenties voor deze externe exit node opnieuw wilt genereren?",
     "remoteExitNodeRegenerateCredentialsWarning": "Dit zal de referenties opnieuw genereren. De remote exit node zal verbonden blijven totdat u deze handmatig herstart en de nieuwe referenties gebruikt.",
-    "agent": "Agent"
+    "agent": "Agent",
+    "personalUseOnly": "Personal Use Only",
+    "loginPageLicenseWatermark": "This instance is licensed for personal use only.",
+    "instanceIsUnlicensed": "This instance is unlicensed."
 }
