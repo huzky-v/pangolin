@@ -2272,5 +2272,8 @@
     "remoteExitNodeRegenerateAndDisconnectWarning": "Bu, kimlik bilgilerini yeniden oluşturacak ve hemen uzak çıkış düğümünün bağlantısını kesecek. Uzak çıkış düğümü, yeni kimlik bilgileri ile yeniden başlatılmalıdır.",
     "remoteExitNodeRegenerateCredentialsConfirmation": "Bu uzak çıkış düğümü için kimlik bilgilerini yeniden oluşturmak istediğinizden emin misiniz?",
     "remoteExitNodeRegenerateCredentialsWarning": "Bu, kimlik bilgilerini yeniden oluşturacak. Uzak çıkış düğümü, manuel olarak yeniden başlatılana ve yeni kimlik bilgiler kullanılana kadar bağlı kalacak.",
-    "agent": "Aracı"
+    "agent": "Aracı",
+    "personalUseOnly": "Personal Use Only",
+    "loginPageLicenseWatermark": "This instance is licensed for personal use only.",
+    "instanceIsUnlicensed": "This instance is unlicensed."
 }
