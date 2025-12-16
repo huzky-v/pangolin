@@ -419,7 +419,7 @@
     "userErrorExistsDescription": "Bu kullanıcı zaten organizasyonun bir üyesidir.",
     "inviteError": "Kullanıcı davet etme başarısız oldu",
     "inviteErrorDescription": "Kullanıcı davet edilirken bir hata oluştu",
-    "userInvited": "Kullanıcı davet edildi",
+    "userInvited": "User Invited",
     "userInvitedDescription": "Kullanıcı başarıyla davet edilmiştir.",
     "userErrorCreate": "Kullanıcı oluşturulamadı",
     "userErrorCreateDescription": "Kullanıcı oluşturulurken bir hata oluştu",
