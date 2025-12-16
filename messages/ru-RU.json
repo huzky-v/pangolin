@@ -419,7 +419,7 @@
     "userErrorExistsDescription": "Этот пользователь уже является участником организации.",
     "inviteError": "Не удалось пригласить пользователя",
     "inviteErrorDescription": "Произошла ошибка при приглашении пользователя",
-    "userInvited": "Пользователь приглашён",
+    "userInvited": "User Invited",
     "userInvitedDescription": "Пользователь был успешно приглашён.",
     "userErrorCreate": "Не удалось создать пользователя",
     "userErrorCreateDescription": "Произошла ошибка при создании пользователя",
