@@ -419,7 +419,7 @@
     "userErrorExistsDescription": "Този потребител вече е член на организацията.",
     "inviteError": "Неуспешно поканване на потребител",
     "inviteErrorDescription": "Възникна грешка при поканването на потребителя",
-    "userInvited": "Потребителят е поканен",
+    "userInvited": "User Invited",
     "userInvitedDescription": "Потребителят беше успешно поканен.",
     "userErrorCreate": "Неуспешно създаване на потребител",
     "userErrorCreateDescription": "Възникна грешка при създаване на потребителя",
