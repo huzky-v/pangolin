@@ -1035,6 +1035,7 @@
     "updateOrgUser": "Organizasyon Kullanıcısını Güncelle",
     "createOrgUser": "Organizasyon Kullanıcısı Oluştur",
     "actionUpdateOrg": "Kuruluşu Güncelle",
+    "actionRemoveInvitation": "Remove Invitation",
     "actionUpdateUser": "Kullanıcıyı Güncelle",
     "actionGetUser": "Kullanıcıyı Getir",
     "actionGetOrgUser": "Kuruluş Kullanıcısını Al",
