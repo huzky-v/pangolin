@@ -1035,6 +1035,7 @@
     "updateOrgUser": "조직 사용자 업데이트",
     "createOrgUser": "조직 사용자 생성",
     "actionUpdateOrg": "조직 업데이트",
+    "actionRemoveInvitation": "Remove Invitation",
     "actionUpdateUser": "사용자 업데이트",
     "actionGetUser": "사용자 조회",
     "actionGetOrgUser": "조직 사용자 가져오기",
