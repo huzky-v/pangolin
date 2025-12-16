@@ -419,7 +419,7 @@
     "userErrorExistsDescription": "Deze gebruiker is al lid van de organisatie.",
     "inviteError": "Uitnodigen van gebruiker mislukt",
     "inviteErrorDescription": "Er is een fout opgetreden tijdens het uitnodigen van de gebruiker",
-    "userInvited": "Gebruiker uitgenodigd",
+    "userInvited": "User Invited",
     "userInvitedDescription": "De gebruiker is succesvol uitgenodigd.",
     "userErrorCreate": "Gebruiker aanmaken mislukt",
     "userErrorCreateDescription": "Fout opgetreden tijdens het aanmaken van de gebruiker",
