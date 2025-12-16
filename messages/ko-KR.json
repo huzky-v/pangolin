@@ -419,7 +419,7 @@
     "userErrorExistsDescription": "이 사용자는 이미 조직의 구성원입니다.",
     "inviteError": "사용자 초대에 실패했습니다",
     "inviteErrorDescription": "사용자를 초대하는 동안 오류가 발생했습니다.",
-    "userInvited": "사용자가 초대되었습니다.",
+    "userInvited": "User Invited",
     "userInvitedDescription": "사용자가 성공적으로 초대되었습니다.",
     "userErrorCreate": "사용자 생성에 실패했습니다.",
     "userErrorCreateDescription": "사용자를 생성하는 동안 오류가 발생했습니다.",
