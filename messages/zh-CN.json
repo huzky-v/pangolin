@@ -419,7 +419,7 @@
     "userErrorExistsDescription": "此用户已经是组织成员。",
     "inviteError": "邀请用户失败",
     "inviteErrorDescription": "邀请用户时出错",
-    "userInvited": "用户邀请",
+    "userInvited": "User Invited",
     "userInvitedDescription": "用户已被成功邀请。",
     "userErrorCreate": "创建用户失败",
     "userErrorCreateDescription": "创建用户时出错",
