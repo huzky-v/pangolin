@@ -419,7 +419,7 @@
     "userErrorExistsDescription": "Este usuario ya es miembro de la organización.",
     "inviteError": "Error al invitar al usuario",
     "inviteErrorDescription": "Ocurrió un error mientras se invitaba al usuario",
-    "userInvited": "Usuario invitado",
+    "userInvited": "User Invited",
     "userInvitedDescription": "El usuario ha sido invitado con éxito.",
     "userErrorCreate": "Error al crear el usuario",
     "userErrorCreateDescription": "Se ha producido un error al crear el usuario",
