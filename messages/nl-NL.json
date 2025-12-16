@@ -1035,6 +1035,7 @@
     "updateOrgUser": "Org gebruiker bijwerken",
     "createOrgUser": "Org gebruiker aanmaken",
     "actionUpdateOrg": "Organisatie bijwerken",
+    "actionRemoveInvitation": "Remove Invitation",
     "actionUpdateUser": "Gebruiker bijwerken",
     "actionGetUser": "Gebruiker ophalen",
     "actionGetOrgUser": "Krijg organisatie-gebruiker",
