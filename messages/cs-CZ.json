@@ -419,7 +419,7 @@
     "userErrorExistsDescription": "Tento uživatel je již členem organizace.",
     "inviteError": "Nepodařilo se pozvat uživatele",
     "inviteErrorDescription": "Při pozvání uživatele došlo k chybě",
-    "userInvited": "Uživatel pozván",
+    "userInvited": "User Invited",
     "userInvitedDescription": "Uživatel byl úspěšně pozván.",
     "userErrorCreate": "Nepodařilo se vytvořit uživatele",
     "userErrorCreateDescription": "Došlo k chybě při vytváření uživatele",
