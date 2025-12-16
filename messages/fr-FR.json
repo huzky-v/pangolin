@@ -1035,6 +1035,7 @@
     "updateOrgUser": "Mise à jour de l'utilisateur Org",
     "createOrgUser": "Créer un utilisateur Org",
     "actionUpdateOrg": "Mettre à jour l'organisation",
+    "actionRemoveInvitation": "Remove Invitation",
     "actionUpdateUser": "Mettre à jour l'utilisateur",
     "actionGetUser": "Obtenir l'utilisateur",
     "actionGetOrgUser": "Obtenir l'utilisateur de l'organisation",
