@@ -419,7 +419,7 @@
     "userErrorExistsDescription": "Denne brukeren er allerede medlem av organisasjonen.",
     "inviteError": "Kunne ikke invitere bruker",
     "inviteErrorDescription": "En feil oppsto under invitering av brukeren",
-    "userInvited": "Bruker invitert",
+    "userInvited": "User Invited",
     "userInvitedDescription": "Brukeren er vellykket invitert.",
     "userErrorCreate": "Kunne ikke opprette bruker",
     "userErrorCreateDescription": "Det oppsto en feil under oppretting av brukeren",
