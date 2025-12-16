@@ -1035,6 +1035,7 @@
     "updateOrgUser": "Aktualizovat Org uživatele",
     "createOrgUser": "Vytvořit Org uživatele",
     "actionUpdateOrg": "Aktualizovat organizaci",
+    "actionRemoveInvitation": "Remove Invitation",
     "actionUpdateUser": "Aktualizovat uživatele",
     "actionGetUser": "Získat uživatele",
     "actionGetOrgUser": "Získat uživatele organizace",
