@@ -15,33 +15,33 @@ import { isTargetValid } from "@server/lib/validators";
 import { OpenAPITags, registry } from "@server/openApi";
 import { vs } from "@react-email/components";
 
-const updateTargetParamsSchema = z.strictObject({
-    targetId: z.string().transform(Number).pipe(z.int().positive())
+const updateTargetParamsSchema = z.object({
+    targetId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 const updateTargetBodySchema = z
     .strictObject({
-        siteId: z.int().positive(),
+        siteId: z.number().int().positive(),
         ip: z.string().refine(isTargetValid),
         method: z.string().min(1).max(10).optional().nullable(),
-        port: z.int().min(1).max(65535).optional(),
+        port: z.number().int().min(1).max(65535).optional(),
         enabled: z.boolean().optional(),
         hcEnabled: z.boolean().optional().nullable(),
         hcPath: z.string().min(1).optional().nullable(),
         hcScheme: z.string().optional().nullable(),
         hcMode: z.string().optional().nullable(),
         hcHostname: z.string().optional().nullable(),
-        hcPort: z.int().positive().optional().nullable(),
-        hcInterval: z.int().positive().min(5).optional().nullable(),
-        hcUnhealthyInterval: z.int().positive().min(5).optional().nullable(),
-        hcTimeout: z.int().positive().min(1).optional().nullable(),
+        hcPort: z.number().int().positive().optional().nullable(),
+        hcInterval: z.number().int().positive().min(5).optional().nullable(),
+        hcUnhealthyInterval: z.number().int().positive().min(5).optional().nullable(),
+        hcTimeout: z.number().int().positive().min(1).optional().nullable(),
         hcHeaders: z
-            .array(z.strictObject({ name: z.string(), value: z.string() }))
+            .array(z.object({ name: z.string(), value: z.string() }))
             .nullable()
             .optional(),
         hcFollowRedirects: z.boolean().optional().nullable(),
         hcMethod: z.string().min(1).optional().nullable(),
-        hcStatus: z.int().optional().nullable(),
+        hcStatus: z.number().int().optional().nullable(),
         hcTlsServerName: z.string().optional().nullable(),
         path: z.string().optional().nullable(),
         pathMatchType: z
@@ -53,10 +53,10 @@ const updateTargetBodySchema = z
             .enum(["exact", "prefix", "regex", "stripPrefix"])
             .optional()
             .nullable(),
-        priority: z.int().min(1).max(1000).optional()
+        priority: z.number().int().min(1).max(1000).optional()
     })
     .refine((data) => Object.keys(data).length > 0, {
-        error: "At least one field must be provided for update"
+        message: "At least one field must be provided for update"
     });
 
 registry.registerPath({

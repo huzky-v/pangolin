@@ -30,11 +30,11 @@ import {
 } from "@server/lib/billing";
 import { getLineItems } from "@server/lib/billing/getLineItems";
 
-const changeTierSchema = z.strictObject({
+const changeTierSchema = z.object({
     orgId: z.string()
 });
 
-const changeTierBodySchema = z.strictObject({
+const changeTierBodySchema = z.object({
     tier: z.enum(["tier1", "tier2", "tier3"])
 });
 

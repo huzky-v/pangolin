@@ -9,8 +9,8 @@ import createHttpError from "http-errors";
 import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 
-const listRoleSitesSchema = z.strictObject({
-    roleId: z.string().transform(Number).pipe(z.int().positive())
+const listRoleSitesSchema = z.object({
+    roleId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 export async function listRoleSites(

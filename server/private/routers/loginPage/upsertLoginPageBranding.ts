@@ -28,16 +28,15 @@ import { eq, InferInsertModel } from "drizzle-orm";
 import { build } from "@server/build";
 import config from "#private/lib/config";
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     orgId: z.string()
 });
 
-const bodySchema = z.strictObject({
+const bodySchema = z.object({
     logoUrl: z
         .union([
             z.literal(""),
-            z
-                .url("Must be a valid URL")
+            z.string().url("Must be a valid URL")
                 .superRefine(async (url, ctx) => {
                     try {
                         const response = await fetch(url, {
@@ -84,8 +83,8 @@ const bodySchema = z.strictObject({
         ])
         .transform((val) => (val === "" ? null : val))
         .nullish(),
-    logoWidth: z.coerce.number<number>().min(1),
-    logoHeight: z.coerce.number<number>().min(1),
+    logoWidth: z.coerce.number().min(1),
+    logoHeight: z.coerce.number().min(1),
     resourceTitle: z.string(),
     resourceSubtitle: z.string().optional(),
     orgTitle: z.string().optional(),

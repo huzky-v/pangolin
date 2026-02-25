@@ -10,7 +10,7 @@ import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const removeInvitationParamsSchema = z.strictObject({
+const removeInvitationParamsSchema = z.object({
     orgId: z.string(),
     inviteId: z.string()
 });

@@ -32,23 +32,23 @@ import { eq, isNull, sql, not, and, desc } from "drizzle-orm";
 import response from "@server/lib/response";
 import { getUserDeviceName } from "@server/db/names";
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     orgId: z.string()
 });
 
-const querySchema = z.strictObject({
+const querySchema = z.object({
     limit: z
         .string()
         .optional()
         .default("1000")
         .transform(Number)
-        .pipe(z.int().nonnegative()),
+        .pipe(z.number().int().nonnegative()),
     offset: z
         .string()
         .optional()
         .default("0")
         .transform(Number)
-        .pipe(z.int().nonnegative()),
+        .pipe(z.number().int().nonnegative()),
     approvalState: z
         .enum(["pending", "approved", "denied", "all"])
         .optional()

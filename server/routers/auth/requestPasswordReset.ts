@@ -17,8 +17,8 @@ import ResetPasswordCode from "@server/emails/templates/ResetPasswordCode";
 import { hashPassword } from "@server/auth/password";
 import { UserType } from "@server/types/UserTypes";
 
-export const requestPasswordResetBody = z.strictObject({
-    email: z.email().toLowerCase()
+export const requestPasswordResetBody = z.object({
+    email: z.string().email().toLowerCase()
 });
 
 export type RequestPasswordResetBody = z.infer<typeof requestPasswordResetBody>;

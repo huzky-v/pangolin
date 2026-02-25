@@ -11,12 +11,12 @@ import stoi from "@server/lib/stoi";
 import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const getSiteSchema = z.strictObject({
+const getSiteSchema = z.object({
     siteId: z
         .string()
         .optional()
         .transform(stoi)
-        .pipe(z.int().positive().optional())
+        .pipe(z.number().int().positive().optional())
         .optional(),
     niceId: z.string().optional(),
     orgId: z.string().optional()

@@ -22,11 +22,11 @@ import { isSecondLevelDomain, isValidDomain } from "@server/lib/validators";
 import { build } from "@server/build";
 import config from "@server/lib/config";
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     orgId: z.string()
 });
 
-const bodySchema = z.strictObject({
+const bodySchema = z.object({
     type: z.enum(["ns", "cname", "wildcard"]),
     baseDomain: subdomainSchema,
     certResolver: z.string().optional().nullable(),

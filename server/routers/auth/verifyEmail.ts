@@ -13,7 +13,7 @@ import logger from "@server/logger";
 import { freeLimitSet, limitsService } from "@server/lib/billing";
 import { build } from "@server/build";
 
-export const verifyEmailBody = z.strictObject({
+export const verifyEmailBody = z.object({
     code: z.string()
 });
 

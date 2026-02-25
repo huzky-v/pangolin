@@ -10,7 +10,7 @@ import { fromError } from "zod-validation-error";
 import { eq, and, inArray } from "drizzle-orm";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const bodySchema = z.strictObject({
+const bodySchema = z.object({
     actionIds: z
         .tuple([z.string()], z.string())
         .transform((v) => Array.from(new Set(v)))

@@ -10,12 +10,12 @@ import { fromError } from "zod-validation-error";
 import { eq, and, ne, inArray } from "drizzle-orm";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const setResourceRolesBodySchema = z.strictObject({
-    roleIds: z.array(z.int().positive())
+const setResourceRolesBodySchema = z.object({
+    roleIds: z.array(z.number().int().positive())
 });
 
-const setResourceRolesParamsSchema = z.strictObject({
-    resourceId: z.string().transform(Number).pipe(z.int().positive())
+const setResourceRolesParamsSchema = z.object({
+    resourceId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 registry.registerPath({

@@ -43,11 +43,11 @@ export interface Container {
     networks: Record<string, ContainerNetwork>;
 }
 
-const siteIdParamsSchema = z.strictObject({
-    siteId: z.string().transform(stoi).pipe(z.int().positive())
+const siteIdParamsSchema = z.object({
+    siteId: z.string().transform(stoi).pipe(z.number().int().positive())
 });
 
-const DockerStatusSchema = z.strictObject({
+const DockerStatusSchema = z.object({
     isAvailable: z.boolean(),
     socketPath: z.string().optional()
 });

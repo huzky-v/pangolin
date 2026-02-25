@@ -20,13 +20,13 @@ const querySchema = z.object({
         .optional()
         .default("1000")
         .transform(Number)
-        .pipe(z.int().positive()),
+        .pipe(z.number().int().positive()),
     offset: z
         .string()
         .optional()
         .default("0")
         .transform(Number)
-        .pipe(z.int().nonnegative())
+        .pipe(z.number().int().nonnegative())
 });
 
 function queryActions(apiKeyId: string) {

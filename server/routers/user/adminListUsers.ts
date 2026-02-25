@@ -7,21 +7,21 @@ import createHttpError from "http-errors";
 import { sql, eq } from "drizzle-orm";
 import logger from "@server/logger";
 import { idp, users } from "@server/db";
-import { fromZodError } from "zod-validation-error";
+import { fromError } from "zod-validation-error";
 
-const listUsersSchema = z.strictObject({
+const listUsersSchema = z.object({
     limit: z
         .string()
         .optional()
         .default("1000")
         .transform(Number)
-        .pipe(z.int().nonnegative()),
+        .pipe(z.number().int().nonnegative()),
     offset: z
         .string()
         .optional()
         .default("0")
         .transform(Number)
-        .pipe(z.int().nonnegative())
+        .pipe(z.number().int().nonnegative())
 });
 
 async function queryUsers(limit: number, offset: number) {
@@ -62,7 +62,7 @@ export async function adminListUsers(
             return next(
                 createHttpError(
                     HttpCode.BAD_REQUEST,
-                    fromZodError(parsedQuery.error)
+                    fromError(parsedQuery.error)
                 )
             );
         }

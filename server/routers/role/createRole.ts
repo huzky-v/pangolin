@@ -14,11 +14,11 @@ import { build } from "@server/build";
 import { isLicensedOrSubscribed } from "#dynamic/lib/isLicencedOrSubscribed";
 import { tierMatrix } from "@server/lib/billing/tierMatrix";
 
-const createRoleParamsSchema = z.strictObject({
+const createRoleParamsSchema = z.object({
     orgId: z.string()
 });
 
-const createRoleSchema = z.strictObject({
+const createRoleSchema = z.object({
     name: z.string().min(1).max(255),
     description: z.string().optional(),
     requireDeviceApproval: z.boolean().optional()

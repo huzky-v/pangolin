@@ -87,7 +87,7 @@ export const productUpdatesQueries = {
 
 export const clientFilterSchema = z.object({
     filter: z.enum(["machine", "user"]),
-    limit: z.int().prefault(1000).optional()
+    limit: z.number().int().default(1000).optional()
 });
 
 export const orgQueries = {
@@ -186,20 +186,20 @@ export const logAnalyticsFiltersSchema = z.object({
     timeStart: z
         .string()
         .refine((val) => !isNaN(Date.parse(val)), {
-            error: "timeStart must be a valid ISO date string"
+            message: "timeStart must be a valid ISO date string"
         })
         .optional(),
     timeEnd: z
         .string()
         .refine((val) => !isNaN(Date.parse(val)), {
-            error: "timeEnd must be a valid ISO date string"
+            message: "timeEnd must be a valid ISO date string"
         })
         .optional(),
     resourceId: z
         .string()
         .optional()
         .transform(Number)
-        .pipe(z.int().positive())
+        .pipe(z.number().int().positive())
         .optional()
 });
 

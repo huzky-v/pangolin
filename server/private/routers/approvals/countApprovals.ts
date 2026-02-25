@@ -22,11 +22,11 @@ import { approvals, db, type Approval } from "@server/db";
 import { eq, sql, and } from "drizzle-orm";
 import response from "@server/lib/response";
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     orgId: z.string()
 });
 
-const querySchema = z.strictObject({
+const querySchema = z.object({
     approvalState: z
         .enum(["pending", "approved", "denied", "all"])
         .optional()

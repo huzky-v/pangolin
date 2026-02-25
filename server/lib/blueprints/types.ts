@@ -9,15 +9,15 @@ export const SiteSchema = z.object({
 
 export const TargetHealthCheckSchema = z.object({
     hostname: z.string(),
-    port: z.int().min(1).max(65535),
+    port: z.number().int().min(1).max(65535),
     enabled: z.boolean().optional().default(true),
     path: z.string().optional().default("/"),
     scheme: z.string().optional(),
     mode: z.string().default("http"),
-    interval: z.int().default(30),
-    "unhealthy-interval": z.int().default(30),
-    unhealthyInterval: z.int().optional(), // deprecated alias
-    timeout: z.int().default(5),
+    interval: z.number().int().default(30),
+    "unhealthy-interval": z.number().int().default(30),
+    unhealthyInterval: z.number().int().optional(), // deprecated alias
+    timeout: z.number().int().default(5),
     headers: z
         .array(z.object({ name: z.string(), value: z.string() }))
         .nullable()
@@ -26,7 +26,7 @@ export const TargetHealthCheckSchema = z.object({
     "follow-redirects": z.boolean().default(true),
     followRedirects: z.boolean().optional(), // deprecated alias
     method: z.string().default("GET"),
-    status: z.int().optional()
+    status: z.number().int().optional()
 });
 
 // Schema for individual target within a resource
@@ -34,9 +34,9 @@ export const TargetSchema = z.object({
     site: z.string().optional(),
     method: z.enum(["http", "https", "h2c"]).optional(),
     hostname: z.string(),
-    port: z.int().min(1).max(65535),
+    port: z.number().int().min(1).max(65535),
     enabled: z.boolean().optional().default(true),
-    "internal-port": z.int().min(1).max(65535).optional(),
+    "internal-port": z.number().int().min(1).max(65535).optional(),
     path: z.string().optional(),
     "path-match": z.enum(["exact", "prefix", "regex"]).optional().nullable(),
     healthcheck: TargetHealthCheckSchema.optional(),
@@ -46,7 +46,7 @@ export const TargetSchema = z.object({
         .enum(["exact", "prefix", "regex", "stripPrefix"])
         .optional()
         .nullable(),
-    priority: z.int().min(1).max(1000).optional().default(100)
+    priority: z.number().int().min(1).max(1000).optional().default(100)
 });
 export type TargetData = z.infer<typeof TargetSchema>;
 
@@ -67,11 +67,11 @@ export const AuthSchema = z.object({
         .optional()
         .default([])
         .refine((roles) => !roles.includes("Admin"), {
-            error: "Admin role cannot be included in sso-roles"
+            message: "Admin role cannot be included in sso-roles"
         }),
-    "sso-users": z.array(z.email()).optional().default([]),
-    "whitelist-users": z.array(z.email()).optional().default([]),
-    "auto-login-idp": z.int().positive().optional()
+    "sso-users": z.array(z.string().email()).optional().default([]),
+    "whitelist-users": z.array(z.string().email()).optional().default([]),
+    "auto-login-idp": z.number().int().positive().optional()
 });
 
 export const RuleSchema = z
@@ -79,13 +79,13 @@ export const RuleSchema = z
         action: z.enum(["allow", "deny", "pass"]),
         match: z.enum(["cidr", "path", "ip", "country", "asn"]),
         value: z.string(),
-        priority: z.int().optional()
+        priority: z.number().int().optional()
     })
     .refine(
         (rule) => {
             if (rule.match === "ip") {
                 // Check if it's a valid IP address (v4 or v6)
-                return z.union([z.ipv4(), z.ipv6()]).safeParse(rule.value)
+                return z.union([z.string().ip({ version: "v4" }), z.string().ip({ version: "v6" })]).safeParse(rule.value)
                     .success;
             }
             return true;
@@ -99,7 +99,7 @@ export const RuleSchema = z
         (rule) => {
             if (rule.match === "cidr") {
                 // Check if it's a valid CIDR (v4 or v6)
-                return z.union([z.cidrv4(), z.cidrv6()]).safeParse(rule.value)
+                return z.union([z.string().cidr({ version: "v4" }), z.string().cidr({ version: "v6" })]).safeParse(rule.value)
                     .success;
             }
             return true;
@@ -151,7 +151,7 @@ export const ResourceSchema = z
         protocol: z.enum(["http", "tcp", "udp"]).optional(),
         ssl: z.boolean().optional(),
         "full-domain": z.string().optional(),
-        "proxy-port": z.int().min(1).max(65535).optional(),
+        "proxy-port": z.number().int().min(1).max(65535).optional(),
         enabled: z.boolean().optional(),
         targets: z.array(TargetSchema.nullable()).optional().default([]),
         auth: AuthSchema.optional(),
@@ -174,7 +174,7 @@ export const ResourceSchema = z
         },
         {
             path: ["name", "protocol"],
-            error: "Resource must either be targets-only (only 'targets' field) or have both 'name' and 'protocol' fields at a minimum"
+            message: "Resource must either be targets-only (only 'targets' field) or have both 'name' and 'protocol' fields at a minimum"
         }
     )
     .refine(
@@ -193,7 +193,7 @@ export const ResourceSchema = z
         },
         {
             path: ["targets"],
-            error: "When protocol is 'http', all targets must have a 'method' field"
+            message: "When protocol is 'http', all targets must have a 'method' field"
         }
     )
     .refine(
@@ -212,7 +212,7 @@ export const ResourceSchema = z
         },
         {
             path: ["targets"],
-            error: "When protocol is 'tcp' or 'udp', targets must not have a 'method' field"
+            message: "When protocol is 'tcp' or 'udp', targets must not have a 'method' field"
         }
     )
     .refine(
@@ -232,7 +232,7 @@ export const ResourceSchema = z
         },
         {
             path: ["full-domain"],
-            error: "When protocol is 'http', a 'full-domain' must be provided"
+            message: "When protocol is 'http', a 'full-domain' must be provided"
         }
     )
     .refine(
@@ -249,7 +249,7 @@ export const ResourceSchema = z
         },
         {
             path: ["proxy-port", "exit-node"],
-            error: "When protocol is 'tcp' or 'udp', 'proxy-port' must be provided"
+            message: "When protocol is 'tcp' or 'udp', 'proxy-port' must be provided"
         }
     )
     .refine(
@@ -267,7 +267,7 @@ export const ResourceSchema = z
         },
         {
             path: ["auth"],
-            error: "When protocol is 'tcp' or 'udp', 'auth' must not be provided"
+            message: "When protocol is 'tcp' or 'udp', 'auth' must not be provided"
         }
     )
     .refine(
@@ -314,8 +314,8 @@ export const ClientResourceSchema = z
         mode: z.enum(["host", "cidr"]),
         site: z.string(),
         // protocol: z.enum(["tcp", "udp"]).optional(),
-        // proxyPort: z.int().positive().optional(),
-        // destinationPort: z.int().positive().optional(),
+        // proxyPort: z.number().int().positive().optional(),
+        // destinationPort: z.number().int().positive().optional(),
         destination: z.string().min(1),
         // enabled: z.boolean().default(true),
         "tcp-ports": portRangeStringSchema.optional().default("*"),
@@ -333,9 +333,9 @@ export const ClientResourceSchema = z
             .optional()
             .default([])
             .refine((roles) => !roles.includes("Admin"), {
-                error: "Admin role cannot be included in roles"
+                message: "Admin role cannot be included in roles"
             }),
-        users: z.array(z.email()).optional().default([]),
+        users: z.array(z.string().email()).optional().default([]),
         machines: z.array(z.string()).optional().default([])
     })
     .refine(
@@ -343,7 +343,7 @@ export const ClientResourceSchema = z
             if (data.mode === "host") {
                 // Check if it's a valid IP address using zod (v4 or v6)
                 const isValidIP = z
-                    .union([z.ipv4(), z.ipv6()])
+                    .union([z.string().ip({ version: "v4" }), z.string().ip({ version: "v6" })])
                     .safeParse(data.destination).success;
 
                 if (isValidIP) {
@@ -370,7 +370,7 @@ export const ClientResourceSchema = z
             if (data.mode === "cidr") {
                 // Check if it's a valid CIDR (v4 or v6)
                 const isValidCIDR = z
-                    .union([z.cidrv4(), z.cidrv6()])
+                    .union([z.string().cidr({ version: "v4" }), z.string().cidr({ version: "v6" })])
                     .safeParse(data.destination).success;
                 return isValidCIDR;
             }
@@ -387,20 +387,20 @@ export const ConfigSchema = z
         "proxy-resources": z
             .record(z.string(), ResourceSchema)
             .optional()
-            .prefault({}),
+            .default({}),
         "public-resources": z
             .record(z.string(), ResourceSchema)
             .optional()
-            .prefault({}),
+            .default({}),
         "client-resources": z
             .record(z.string(), ClientResourceSchema)
             .optional()
-            .prefault({}),
+            .default({}),
         "private-resources": z
             .record(z.string(), ClientResourceSchema)
             .optional()
-            .prefault({}),
-        sites: z.record(z.string(), SiteSchema).optional().prefault({})
+            .default({}),
+        sites: z.record(z.string(), SiteSchema).optional().default({})
     })
     .transform((data) => {
         // Merge public-resources into proxy-resources

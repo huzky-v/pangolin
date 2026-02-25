@@ -9,7 +9,7 @@ import createHttpError from "http-errors";
 import logger from "@server/logger";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const adminGetUserSchema = z.strictObject({
+const adminGetUserSchema = z.object({
     userId: z.string().min(1)
 });
 

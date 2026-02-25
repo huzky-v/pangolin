@@ -27,7 +27,7 @@ import createHttpError from "http-errors";
 import { z } from "zod";
 import { fromError } from "zod-validation-error";
 
-const createSiteResourceParamsSchema = z.strictObject({
+const createSiteResourceParamsSchema = z.object({
     orgId: z.string()
 });
 
@@ -35,10 +35,10 @@ const createSiteResourceSchema = z
     .strictObject({
         name: z.string().min(1).max(255),
         mode: z.enum(["host", "cidr", "port"]),
-        siteId: z.int(),
+        siteId: z.number().int(),
         // protocol: z.enum(["tcp", "udp"]).optional(),
-        // proxyPort: z.int().positive().optional(),
-        // destinationPort: z.int().positive().optional(),
+        // proxyPort: z.number().int().positive().optional(),
+        // destinationPort: z.number().int().positive().optional(),
         destination: z.string().min(1),
         enabled: z.boolean().default(true),
         alias: z
@@ -49,8 +49,8 @@ const createSiteResourceSchema = z
             )
             .optional(),
         userIds: z.array(z.string()),
-        roleIds: z.array(z.int()),
-        clientIds: z.array(z.int()),
+        roleIds: z.array(z.number().int()),
+        clientIds: z.array(z.number().int()),
         tcpPortRangeString: portRangeStringSchema,
         udpPortRangeString: portRangeStringSchema,
         disableIcmp: z.boolean().optional()
@@ -61,8 +61,8 @@ const createSiteResourceSchema = z
             if (data.mode === "host") {
                 // Check if it's a valid IP address using zod (v4 or v6)
                 const isValidIP = z
-                    // .union([z.ipv4(), z.ipv6()])
-                    .union([z.ipv4()]) // for now lets just do ipv4 until we verify ipv6 works everywhere
+                    // .union([z.string().ip({ version: "v4" }), z.string().ip({ version: "v6" })])
+                    z.string().ip({ version: "v4" }) // for now lets just do ipv4 until we verify ipv6 works everywhere
                     .safeParse(data.destination).success;
 
                 if (isValidIP) {
@@ -92,7 +92,7 @@ const createSiteResourceSchema = z
             if (data.mode === "cidr") {
                 // Check if it's a valid CIDR (v4 or v6)
                 const isValidCIDR = z
-                    .union([z.cidrv4(), z.cidrv6()])
+                    .union([z.string().cidr({ version: "v4" }), z.string().cidr({ version: "v6" })])
                     .safeParse(data.destination).success;
                 return isValidCIDR;
             }
@@ -205,7 +205,7 @@ export async function createSiteResource(
 
         // Only check if destination is an IP address
         const isIp = z
-            .union([z.ipv4(), z.ipv6()])
+            .union([z.string().ip({ version: "v4" }), z.string().ip({ version: "v6" })])
             .safeParse(destination).success;
         if (
             isIp &&

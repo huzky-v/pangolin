@@ -10,19 +10,19 @@ import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const querySchema = z.strictObject({
+const querySchema = z.object({
     limit: z
         .string()
         .optional()
         .default("1000")
         .transform(Number)
-        .pipe(z.int().nonnegative()),
+        .pipe(z.number().int().nonnegative()),
     offset: z
         .string()
         .optional()
         .default("0")
         .transform(Number)
-        .pipe(z.int().nonnegative())
+        .pipe(z.number().int().nonnegative())
 });
 
 async function query(limit: number, offset: number) {

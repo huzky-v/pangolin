@@ -23,7 +23,7 @@ import { fromError } from "zod-validation-error";
 import { registry } from "@server/openApi";
 import { GetCertificateResponse } from "@server/routers/certificates/types";
 
-const getCertificateSchema = z.strictObject({
+const getCertificateSchema = z.object({
     domainId: z.string(),
     domain: z.string().min(1).max(255),
     orgId: z.string()

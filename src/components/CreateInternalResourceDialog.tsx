@@ -172,17 +172,16 @@ export default function CreateInternalResourceDialog({
             .string()
             .min(1, t("createInternalResourceDialogNameRequired"))
             .max(255, t("createInternalResourceDialogNameMaxLength")),
-        siteId: z
-            .int()
+        siteId: z.number().int()
             .positive(t("createInternalResourceDialogPleaseSelectSite")),
         // mode: z.enum(["host", "cidr", "port"]),
         mode: z.enum(["host", "cidr"]),
         // protocol: z.enum(["tcp", "udp"]).nullish(),
-        // proxyPort: z.int().positive().min(1, t("createInternalResourceDialogProxyPortMin")).max(65535, t("createInternalResourceDialogProxyPortMax")).nullish(),
+        // proxyPort: z.number().int().positive().min(1, t("createInternalResourceDialogProxyPortMin")).max(65535, t("createInternalResourceDialogProxyPortMax")).nullish(),
         destination: z.string().min(1, {
             message: t("createInternalResourceDialogDestinationRequired")
         }),
-        // destinationPort: z.int().positive().min(1, t("createInternalResourceDialogDestinationPortMin")).max(65535, t("createInternalResourceDialogDestinationPortMax")).nullish(),
+        // destinationPort: z.number().int().positive().min(1, t("createInternalResourceDialogDestinationPortMin")).max(65535, t("createInternalResourceDialogDestinationPortMax")).nullish(),
         alias: z.string().nullish(),
         tcpPortRangeString: createPortRangeStringSchema(t),
         udpPortRangeString: createPortRangeStringSchema(t),

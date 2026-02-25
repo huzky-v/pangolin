@@ -12,8 +12,8 @@ import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 import { BlueprintData } from "./types";
 
-const getBlueprintSchema = z.strictObject({
-    blueprintId: z.string().transform(stoi).pipe(z.int().positive()),
+const getBlueprintSchema = z.object({
+    blueprintId: z.string().transform(stoi).pipe(z.number().int().positive()),
     orgId: z.string()
 });
 

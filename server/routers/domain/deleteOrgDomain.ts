@@ -10,7 +10,7 @@ import { and, eq } from "drizzle-orm";
 import { usageService } from "@server/lib/billing/usageService";
 import { FeatureId } from "@server/lib/billing";
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     domainId: z.string(),
     orgId: z.string()
 });

@@ -10,19 +10,18 @@ import { fromError } from "zod-validation-error";
 import { and, eq } from "drizzle-orm";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const removeEmailFromResourceWhitelistBodySchema = z.strictObject({
-    email: z
-        .email()
+const removeEmailFromResourceWhitelistBodySchema = z.object({
+    email: z.string().email()
         .or(
             z.string().regex(/^\*@[\w.-]+\.[a-zA-Z]{2,}$/, {
-                error: "Invalid email address. Wildcard (*) must be the entire local part."
+                message: "Invalid email address. Wildcard (*) must be the entire local part."
             })
         )
         .transform((v) => v.toLowerCase())
 });
 
-const removeEmailFromResourceWhitelistParamsSchema = z.strictObject({
-    resourceId: z.string().transform(Number).pipe(z.int().positive())
+const removeEmailFromResourceWhitelistParamsSchema = z.object({
+    resourceId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 registry.registerPath({

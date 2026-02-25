@@ -9,7 +9,7 @@ import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     userId: z.string(),
     orgId: z.string()
 });
@@ -19,7 +19,7 @@ const bodySchema = z
         autoProvisioned: z.boolean().optional()
     })
     .refine((data) => Object.keys(data).length > 0, {
-        error: "At least one field must be provided for update"
+        message: "At least one field must be provided for update"
     });
 
 registry.registerPath({

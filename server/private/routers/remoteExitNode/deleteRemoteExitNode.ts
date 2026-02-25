@@ -24,7 +24,7 @@ import { fromError } from "zod-validation-error";
 import { usageService } from "@server/lib/billing/usageService";
 import { FeatureId } from "@server/lib/billing";
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     orgId: z.string().min(1),
     remoteExitNodeId: z.string().min(1)
 });

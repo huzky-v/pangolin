@@ -10,7 +10,7 @@ import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 import { domain } from "zod/v4/core/regexes";
 
-const getDomainSchema = z.strictObject({
+const getDomainSchema = z.object({
     domainId: z.string().optional(),
     orgId: z.string().optional()
 });

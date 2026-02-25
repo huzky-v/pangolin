@@ -9,9 +9,9 @@ import logger from "@server/logger";
 import { eq } from "drizzle-orm";
 import { fromError } from "zod-validation-error";
 
-const addUserSiteSchema = z.strictObject({
+const addUserSiteSchema = z.object({
     userId: z.string(),
-    siteId: z.string().transform(Number).pipe(z.int().positive())
+    siteId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 export async function addUserSite(

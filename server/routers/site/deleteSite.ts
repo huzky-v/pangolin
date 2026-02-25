@@ -15,8 +15,8 @@ import { rebuildClientAssociationsFromSiteResource } from "@server/lib/rebuildCl
 import { usageService } from "@server/lib/billing/usageService";
 import { FeatureId } from "@server/lib/billing";
 
-const deleteSiteSchema = z.strictObject({
-    siteId: z.string().transform(Number).pipe(z.int().positive())
+const deleteSiteSchema = z.object({
+    siteId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 registry.registerPath({

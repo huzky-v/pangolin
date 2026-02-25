@@ -449,13 +449,13 @@ export function generateRemoteSubnets(
         .filter((sr) => {
             if (sr.mode === "cidr") {
                 // check if its a valid CIDR using zod
-                const cidrSchema = z.union([z.cidrv4(), z.cidrv6()]);
+                const cidrSchema = z.union([z.string().cidr({ version: "v4" }), z.string().cidr({ version: "v6" })]);
                 const parseResult = cidrSchema.safeParse(sr.destination);
                 return parseResult.success;
             }
             if (sr.mode === "host") {
                 // check if its a valid IP using zod
-                const ipSchema = z.union([z.ipv4(), z.ipv6()]);
+                const ipSchema = z.union([z.string().ip({ version: "v4" }), z.string().ip({ version: "v6" })]);
                 const parseResult = ipSchema.safeParse(sr.destination);
                 return parseResult.success;
             }
@@ -531,7 +531,7 @@ export function generateSubnetProxyTargets(
         if (siteResource.mode == "host") {
             let destination = siteResource.destination;
             // check if this is a valid ip
-            const ipSchema = z.union([z.ipv4(), z.ipv6()]);
+            const ipSchema = z.union([z.string().ip({ version: "v4" }), z.string().ip({ version: "v6" })]);
             if (ipSchema.safeParse(destination).success) {
                 destination = `${destination}/32`;
 

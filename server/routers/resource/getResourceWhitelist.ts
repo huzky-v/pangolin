@@ -10,8 +10,8 @@ import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const getResourceWhitelistSchema = z.strictObject({
-    resourceId: z.string().transform(Number).pipe(z.int().positive())
+const getResourceWhitelistSchema = z.object({
+    resourceId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 async function queryWhitelist(resourceId: number) {

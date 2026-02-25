@@ -926,8 +926,7 @@ function OneTimePasswordFormSection({
                                                     }
                                                     size={"sm"}
                                                     validateTag={(tag) => {
-                                                        return z
-                                                            .email()
+                                                        return z.string().email()
                                                             .or(
                                                                 z
                                                                     .string()

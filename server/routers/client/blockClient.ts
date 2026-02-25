@@ -12,8 +12,8 @@ import { OpenAPITags, registry } from "@server/openApi";
 import { sendTerminateClient } from "./terminate";
 import { OlmErrorCodes } from "../olm/error";
 
-const blockClientSchema = z.strictObject({
-    clientId: z.string().transform(Number).pipe(z.int().positive())
+const blockClientSchema = z.object({
+    clientId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 registry.registerPath({

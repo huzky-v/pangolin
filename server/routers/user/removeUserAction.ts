@@ -9,11 +9,11 @@ import createHttpError from "http-errors";
 import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 
-const removeUserActionParamsSchema = z.strictObject({
+const removeUserActionParamsSchema = z.object({
     userId: z.string()
 });
 
-const removeUserActionSchema = z.strictObject({
+const removeUserActionSchema = z.object({
     actionId: z.string(),
     orgId: z.string()
 });

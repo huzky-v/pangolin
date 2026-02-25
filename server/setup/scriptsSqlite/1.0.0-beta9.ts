@@ -15,7 +15,7 @@ import fs from "fs";
 import yaml from "js-yaml";
 import path from "path";
 import { z } from "zod";
-import { fromZodError } from "zod-validation-error";
+import { fromError } from "zod-validation-error";
 
 export default async function migration() {
     console.log("Running setup script 1.0.0-beta.9...");
@@ -142,7 +142,7 @@ export default async function migration() {
 
                 console.log("Updated Badger version in Traefik config.");
             } else {
-                console.log(fromZodError(parsedConfig.error));
+                console.log(fromError(parsedConfig.error));
                 console.log(
                     "We were unable to update the version of Badger in your Traefik configuration. Please update it manually to at least v1.0.0-beta.3. https://github.com/fosrl/badger"
                 );
@@ -192,7 +192,7 @@ export default async function migration() {
                     "Deleted permanent from redirect-to-https middleware."
                 );
             } else {
-                console.log(fromZodError(parsedConfig.error));
+                console.log(fromError(parsedConfig.error));
                 console.log(
                     "We were unable to delete the permanent field from the redirect-to-https middleware in your Traefik configuration. Please delete it manually."
                 );

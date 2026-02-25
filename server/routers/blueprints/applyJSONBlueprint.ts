@@ -8,11 +8,11 @@ import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 import { applyBlueprint } from "@server/lib/blueprints/applyBlueprint";
 
-const applyBlueprintSchema = z.strictObject({
+const applyBlueprintSchema = z.object({
     blueprint: z.string()
 });
 
-const applyBlueprintParamsSchema = z.strictObject({
+const applyBlueprintParamsSchema = z.object({
     orgId: z.string()
 });
 

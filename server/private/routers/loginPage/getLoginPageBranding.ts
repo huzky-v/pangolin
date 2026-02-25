@@ -27,7 +27,7 @@ import { fromError } from "zod-validation-error";
 import { eq } from "drizzle-orm";
 
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     orgId: z.string()
 });
 

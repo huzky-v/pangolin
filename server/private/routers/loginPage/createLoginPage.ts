@@ -33,11 +33,11 @@ import { createCertificate } from "#private/routers/certificates/createCertifica
 
 import { CreateLoginPageResponse } from "@server/routers/loginPage/types";
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     orgId: z.string()
 });
 
-const bodySchema = z.strictObject({
+const bodySchema = z.object({
     subdomain: z.string().nullable().optional(),
     domainId: z.string()
 });

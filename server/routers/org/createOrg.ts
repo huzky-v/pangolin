@@ -29,17 +29,19 @@ import { build } from "@server/build";
 import { calculateUserClientsForOrgs } from "@server/lib/calculateUserClientsForOrgs";
 import { doCidrsOverlap } from "@server/lib/ip";
 
-const createOrgSchema = z.strictObject({
+const createOrgSchema = z.object({
     orgId: z.string(),
     name: z.string().min(1).max(255),
     subnet: z
-        // .union([z.cidrv4(), z.cidrv6()])
-        .union([z.cidrv4()]) // for now lets just do ipv4 until we verify ipv6 works everywhere
+        // .union([z.string().cidr({ version: "v4" }), z.string().cidr({ version: "v6" })])
+        .string()
+        .cidr({ version: "v4" }) // for now lets just do ipv4 until we verify ipv6 works everywhere
         .refine((val) => isValidCIDR(val), {
             message: "Invalid subnet CIDR"
         }),
     utilitySubnet: z
-        .union([z.cidrv4()]) // for now lets just do ipv4 until we verify ipv6 works everywhere
+        .string()
+        .cidr({ version: "v4" }) // for now lets just do ipv4 until we verify ipv6 works everywhere
         .refine((val) => isValidCIDR(val), {
             message: "Invalid utility subnet CIDR"
         })

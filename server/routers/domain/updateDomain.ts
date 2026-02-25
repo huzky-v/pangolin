@@ -9,12 +9,12 @@ import { fromError } from "zod-validation-error";
 import { eq, and } from "drizzle-orm";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     orgId: z.string(),
     domainId: z.string()
 });
 
-const bodySchema = z.strictObject({
+const bodySchema = z.object({
     certResolver: z.string().optional().nullable(),
     preferWildcardCert: z.boolean().optional().nullable()
 });

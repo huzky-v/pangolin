@@ -11,9 +11,8 @@ export const configSchema = z
     .object({
         app: z
             .object({
-                dashboard_url: z
-                    .url()
-                    .pipe(z.url())
+                dashboard_url: z.string().url()
+                    .pipe(z.string().url())
                     .transform((url) => url.toLowerCase())
                     .optional(),
                 log_level: z
@@ -27,14 +26,14 @@ export const configSchema = z
                         anonymous_usage: z.boolean().optional().default(true)
                     })
                     .optional()
-                    .prefault({}),
+                    .default({}),
                 notifications: z
                     .object({
                         product_updates: z.boolean().optional().default(true),
                         new_releases: z.boolean().optional().default(true)
                     })
                     .optional()
-                    .prefault({})
+                    .default({})
             })
             .optional()
             .default({
@@ -103,7 +102,7 @@ export const configSchema = z
                         token: z.string().optional().default("P-Access-Token")
                     })
                     .optional()
-                    .prefault({}),
+                    .default({}),
                 resource_session_request_param: z
                     .string()
                     .optional()
@@ -128,7 +127,7 @@ export const configSchema = z
                         credentials: z.boolean().optional()
                     })
                     .optional(),
-                trust_proxy: z.int().gte(0).optional().default(1),
+                trust_proxy: z.number().int().gte(0).optional().default(1),
                 secret: z.string().pipe(z.string().min(8)).optional(),
                 maxmind_db_path: z.string().optional(),
                 maxmind_asn_path: z.string().optional()
@@ -186,7 +185,7 @@ export const configSchema = z
                             .default(5000)
                     })
                     .optional()
-                    .prefault({})
+                    .default({})
             })
             .optional(),
         traefik: z
@@ -219,7 +218,7 @@ export const configSchema = z
                     .default("pp-transport-v")
             })
             .optional()
-            .prefault({}),
+            .default({}),
         gerbil: z
             .object({
                 exit_node_name: z.string().optional(),
@@ -249,7 +248,7 @@ export const configSchema = z
                     .default(30)
             })
             .optional()
-            .prefault({}),
+            .default({}),
         orgs: z
             .object({
                 block_size: z.number().positive().gt(0).optional().default(24),
@@ -283,7 +282,7 @@ export const configSchema = z
                             .default(500)
                     })
                     .optional()
-                    .prefault({}),
+                    .default({}),
                 auth: z
                     .object({
                         window_minutes: z
@@ -300,10 +299,10 @@ export const configSchema = z
                             .default(500)
                     })
                     .optional()
-                    .prefault({})
+                    .default({})
             })
             .optional()
-            .prefault({}),
+            .default({}),
         email: z
             .object({
                 smtp_host: z.string().optional(),
@@ -318,7 +317,7 @@ export const configSchema = z
                     .transform(getEnvOrYaml("EMAIL_SMTP_PASS")),
                 smtp_secure: z.boolean().optional(),
                 smtp_tls_reject_unauthorized: z.boolean().optional(),
-                no_reply: z.email().optional()
+                no_reply: z.string().email().optional()
             })
             .optional(),
         flags: z
@@ -351,7 +350,7 @@ export const configSchema = z
                     .default("cname.pangolin.net")
             })
             .optional()
-            .prefault({})
+            .default({})
     })
     .refine(
         (data) => {
@@ -366,7 +365,7 @@ export const configSchema = z
             return true;
         },
         {
-            error: "At least one domain must be defined"
+            message: "At least one domain must be defined"
         }
     )
     .refine(
@@ -381,7 +380,7 @@ export const configSchema = z
             );
         },
         {
-            error: "Server secret must be defined"
+            message: "Server secret must be defined"
         }
     )
     .refine(
@@ -393,7 +392,7 @@ export const configSchema = z
             );
         },
         {
-            error: "Dashboard URL must be defined"
+            message: "Dashboard URL must be defined"
         }
     );
 

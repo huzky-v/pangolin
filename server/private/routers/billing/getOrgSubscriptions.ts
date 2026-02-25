@@ -20,7 +20,7 @@ import response from "@server/lib/response";
 import HttpCode from "@server/types/HttpCode";
 import createHttpError from "http-errors";
 import logger from "@server/logger";
-import { fromZodError } from "zod-validation-error";
+import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 import { GetOrgSubscriptionResponse } from "@server/routers/billing/types";
 import { usageService } from "@server/lib/billing/usageService";
@@ -35,7 +35,7 @@ import {
     SubscriptionItem
 } from "@server/db";
 
-const getOrgSchema = z.strictObject({
+const getOrgSchema = z.object({
     orgId: z.string()
 });
 
@@ -50,7 +50,7 @@ export async function getOrgSubscriptions(
             return next(
                 createHttpError(
                     HttpCode.BAD_REQUEST,
-                    fromZodError(parsedParams.error)
+                    fromError(parsedParams.error)
                 )
             );
         }

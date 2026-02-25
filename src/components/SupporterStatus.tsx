@@ -75,10 +75,10 @@ export default function SupporterStatus({
 
     const formSchema = z.object({
         githubUsername: z.string().nonempty({
-            error: "GitHub username is required"
+            message: "GitHub username is required"
         }),
         key: z.string().nonempty({
-            error: "Supporter key is required"
+            message: "Supporter key is required"
         })
     });
 

@@ -9,7 +9,7 @@ import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 import { eq, and, inArray } from "drizzle-orm";
 
-const bodySchema = z.strictObject({
+const bodySchema = z.object({
     orgIds: z
         .tuple([z.string()], z.string())
         .transform((v) => Array.from(new Set(v)))

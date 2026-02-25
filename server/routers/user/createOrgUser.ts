@@ -17,11 +17,11 @@ import { calculateUserClientsForOrgs } from "@server/lib/calculateUserClientsFor
 import { isSubscribed } from "#dynamic/lib/isSubscribed";
 import { tierMatrix } from "@server/lib/billing/tierMatrix";
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     orgId: z.string().nonempty()
 });
 
-const bodySchema = z.strictObject({
+const bodySchema = z.object({
     email: z.string().email().toLowerCase().optional(),
     username: z.string().nonempty().toLowerCase(),
     name: z.string().optional(),

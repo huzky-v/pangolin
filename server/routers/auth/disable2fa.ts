@@ -16,7 +16,7 @@ import config from "@server/lib/config";
 import { unauthorized } from "@server/auth/unauthorizedResponse";
 import { UserType } from "@server/types/UserTypes";
 
-export const disable2faBody = z.strictObject({
+export const disable2faBody = z.object({
     password: z.string(),
     code: z.string().optional()
 });

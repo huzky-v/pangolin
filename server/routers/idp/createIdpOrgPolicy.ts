@@ -11,12 +11,12 @@ import config from "@server/lib/config";
 import { eq, and } from "drizzle-orm";
 import { idp, idpOrg } from "@server/db";
 
-const paramsSchema = z.strictObject({
-    idpId: z.coerce.number<number>(),
+const paramsSchema = z.object({
+    idpId: z.coerce.number(),
     orgId: z.string()
 });
 
-const bodySchema = z.strictObject({
+const bodySchema = z.object({
     roleMapping: z.string().optional(),
     orgMapping: z.string().optional()
 });

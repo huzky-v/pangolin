@@ -29,7 +29,7 @@ import { UpdateLoginPageResponse } from "@server/routers/loginPage/types";
 const paramsSchema = z
     .object({
         orgId: z.string(),
-        loginPageId: z.coerce.number<number>()
+        loginPageId: z.coerce.number()
     })
     .strict();
 
@@ -39,7 +39,7 @@ const bodySchema = z
         domainId: z.string().optional()
     })
     .refine((data) => Object.keys(data).length > 0, {
-        error: "At least one field must be provided for update"
+        message: "At least one field must be provided for update"
     })
     .refine(
         (data) => {
@@ -49,7 +49,7 @@ const bodySchema = z
             return true;
         },
         {
-            error: "Invalid subdomain"
+            message: "Invalid subdomain"
         }
     );
 

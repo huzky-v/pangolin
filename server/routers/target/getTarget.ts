@@ -10,8 +10,8 @@ import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const getTargetSchema = z.strictObject({
-    targetId: z.string().transform(Number).pipe(z.int().positive())
+const getTargetSchema = z.object({
+    targetId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 type GetTargetResponse = Target &

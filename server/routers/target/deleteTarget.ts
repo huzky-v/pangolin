@@ -13,8 +13,8 @@ import { removeTargets } from "../newt/targets";
 import { getAllowedIps } from "./helpers";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const deleteTargetSchema = z.strictObject({
-    targetId: z.string().transform(Number).pipe(z.int().positive())
+const deleteTargetSchema = z.object({
+    targetId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 registry.registerPath({

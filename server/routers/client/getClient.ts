@@ -15,12 +15,12 @@ import { build } from "@server/build";
 import { isLicensedOrSubscribed } from "#dynamic/lib/isLicencedOrSubscribed";
 import { tierMatrix } from "@server/lib/billing/tierMatrix";
 
-const getClientSchema = z.strictObject({
+const getClientSchema = z.object({
     clientId: z
         .string()
         .optional()
         .transform(stoi)
-        .pipe(z.int().positive().optional())
+        .pipe(z.number().int().positive().optional())
         .optional(),
     niceId: z.string().optional(),
     orgId: z.string().optional()

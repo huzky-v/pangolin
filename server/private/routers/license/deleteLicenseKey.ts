@@ -23,7 +23,7 @@ import { eq } from "drizzle-orm";
 import { licenseKey } from "@server/db";
 import license from "#private/license/license";
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     licenseKey: z.string().min(1).max(255)
 });
 

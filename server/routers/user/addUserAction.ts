@@ -9,7 +9,7 @@ import logger from "@server/logger";
 import { eq } from "drizzle-orm";
 import { fromError } from "zod-validation-error";
 
-const addUserActionSchema = z.strictObject({
+const addUserActionSchema = z.object({
     userId: z.string(),
     actionId: z.string(),
     orgId: z.string()

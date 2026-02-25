@@ -10,8 +10,8 @@ import { fromError } from "zod-validation-error";
 import logger from "@server/logger";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const listTargetsParamsSchema = z.strictObject({
-    resourceId: z.string().transform(Number).pipe(z.int().positive())
+const listTargetsParamsSchema = z.object({
+    resourceId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 const listTargetsSchema = z.object({
@@ -20,13 +20,13 @@ const listTargetsSchema = z.object({
         .optional()
         .default("1000")
         .transform(Number)
-        .pipe(z.int().positive()),
+        .pipe(z.number().int().positive()),
     offset: z
         .string()
         .optional()
         .default("0")
         .transform(Number)
-        .pipe(z.int().nonnegative())
+        .pipe(z.number().int().nonnegative())
 });
 
 function queryTargets(resourceId: number) {

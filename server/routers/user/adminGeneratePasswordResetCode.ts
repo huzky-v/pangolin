@@ -15,7 +15,7 @@ import { hashPassword } from "@server/auth/password";
 import { UserType } from "@server/types/UserTypes";
 import config from "@server/lib/config";
 
-const adminGeneratePasswordResetCodeSchema = z.strictObject({
+const adminGeneratePasswordResetCodeSchema = z.object({
     userId: z.string().min(1)
 });
 

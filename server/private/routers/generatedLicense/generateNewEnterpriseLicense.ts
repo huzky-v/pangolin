@@ -27,7 +27,7 @@ import z from "zod";
 import { eq } from "drizzle-orm";
 import { log } from "winston";
 
-const generateNewEnterpriseLicenseParamsSchema = z.strictObject({
+const generateNewEnterpriseLicenseParamsSchema = z.object({
     orgId: z.string()
 });
 

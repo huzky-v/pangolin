@@ -22,8 +22,8 @@ import { verifySession } from "@server/auth/sessions/verifySession";
 import { UserType } from "@server/types/UserTypes";
 import { logAccessAudit } from "#dynamic/lib/logAccessAudit";
 
-export const loginBodySchema = z.strictObject({
-    email: z.email().toLowerCase(),
+export const loginBodySchema = z.object({
+    email: z.string().email().toLowerCase(),
     password: z.string(),
     code: z.string().optional(),
     resourceGuid: z.string().optional()

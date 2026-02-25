@@ -9,7 +9,7 @@ import { supporterKey } from "@server/db";
 import { db } from "@server/db";
 import config from "@server/lib/config";
 
-const validateSupporterKeySchema = z.strictObject({
+const validateSupporterKeySchema = z.object({
     githubUsername: z.string().nonempty(),
     key: z.string().nonempty()
 });

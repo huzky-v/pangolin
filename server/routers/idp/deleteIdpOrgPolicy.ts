@@ -10,8 +10,8 @@ import { idp, idpOrg } from "@server/db";
 import { eq, and } from "drizzle-orm";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const paramsSchema = z.strictObject({
-    idpId: z.coerce.number<number>(),
+const paramsSchema = z.object({
+    idpId: z.coerce.number(),
     orgId: z.string()
 });
 

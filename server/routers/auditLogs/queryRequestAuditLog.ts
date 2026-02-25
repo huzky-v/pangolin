@@ -18,10 +18,10 @@ export const queryAccessAuditLogsQuery = z.object({
     timeStart: z
         .string()
         .refine((val) => !isNaN(Date.parse(val)), {
-            error: "timeStart must be a valid ISO date string"
+            message: "timeStart must be a valid ISO date string"
         })
         .transform((val) => Math.floor(new Date(val).getTime() / 1000))
-        .prefault(() => getSevenDaysAgo().toISOString())
+        .default(() => getSevenDaysAgo().toISOString())
         .openapi({
             type: "string",
             format: "date-time",
@@ -31,11 +31,11 @@ export const queryAccessAuditLogsQuery = z.object({
     timeEnd: z
         .string()
         .refine((val) => !isNaN(Date.parse(val)), {
-            error: "timeEnd must be a valid ISO date string"
+            message: "timeEnd must be a valid ISO date string"
         })
         .transform((val) => Math.floor(new Date(val).getTime() / 1000))
         .optional()
-        .prefault(() => new Date().toISOString())
+        .default(() => new Date().toISOString())
         .openapi({
             type: "string",
             format: "date-time",
@@ -51,13 +51,13 @@ export const queryAccessAuditLogsQuery = z.object({
         .string()
         .optional()
         .transform(Number)
-        .pipe(z.int().positive())
+        .pipe(z.number().int().positive())
         .optional(),
     resourceId: z
         .string()
         .optional()
         .transform(Number)
-        .pipe(z.int().positive())
+        .pipe(z.number().int().positive())
         .optional(),
     actor: z.string().optional(),
     location: z.string().optional(),
@@ -68,13 +68,13 @@ export const queryAccessAuditLogsQuery = z.object({
         .optional()
         .default("1000")
         .transform(Number)
-        .pipe(z.int().positive()),
+        .pipe(z.number().int().positive()),
     offset: z
         .string()
         .optional()
         .default("0")
         .transform(Number)
-        .pipe(z.int().nonnegative())
+        .pipe(z.number().int().nonnegative())
 });
 
 export const queryRequestAuditLogsParams = z.object({

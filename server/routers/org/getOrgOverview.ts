@@ -16,9 +16,9 @@ import response from "@server/lib/response";
 import HttpCode from "@server/types/HttpCode";
 import createHttpError from "http-errors";
 import logger from "@server/logger";
-import { fromZodError } from "zod-validation-error";
+import { fromError } from "zod-validation-error";
 
-const getOrgParamsSchema = z.strictObject({
+const getOrgParamsSchema = z.object({
     orgId: z.string()
 });
 
@@ -44,7 +44,7 @@ export async function getOrgOverview(
             return next(
                 createHttpError(
                     HttpCode.BAD_REQUEST,
-                    fromZodError(parsedParams.error)
+                    fromError(parsedParams.error)
                 )
             );
         }

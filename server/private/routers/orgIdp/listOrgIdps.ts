@@ -24,22 +24,22 @@ import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 import { ListOrgIdpsResponse } from "@server/routers/orgIdp/types";
 
-const querySchema = z.strictObject({
+const querySchema = z.object({
     limit: z
         .string()
         .optional()
         .default("1000")
         .transform(Number)
-        .pipe(z.int().nonnegative()),
+        .pipe(z.number().int().nonnegative()),
     offset: z
         .string()
         .optional()
         .default("0")
         .transform(Number)
-        .pipe(z.int().nonnegative())
+        .pipe(z.number().int().nonnegative())
 });
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     orgId: z.string().nonempty()
 });
 

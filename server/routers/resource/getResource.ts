@@ -11,12 +11,12 @@ import logger from "@server/logger";
 import stoi from "@server/lib/stoi";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const getResourceSchema = z.strictObject({
+const getResourceSchema = z.object({
     resourceId: z
         .string()
         .optional()
         .transform(stoi)
-        .pipe(z.int().positive().optional())
+        .pipe(z.number().int().positive().optional())
         .optional(),
     niceId: z.string().optional(),
     orgId: z.string().optional()

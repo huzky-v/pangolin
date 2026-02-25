@@ -36,7 +36,7 @@ export const paramsSchema = z.object({
     orgId: z.string()
 });
 
-const bodySchema = z.strictObject({
+const bodySchema = z.object({
     remoteExitNodeId: z.string().length(15),
     secret: z.string().length(48),
     disconnect: z.boolean().optional().default(true)

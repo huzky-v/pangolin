@@ -10,7 +10,7 @@ import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 import { calculateUserClientsForOrgs } from "@server/lib/calculateUserClientsForOrgs";
 
-const removeUserSchema = z.strictObject({
+const removeUserSchema = z.object({
     userId: z.string()
 });
 

@@ -81,15 +81,13 @@ export default function HealthCheckDialog({
         hcMethod: z
             .string()
             .min(1, { message: t("healthCheckMethodRequired") }),
-        hcInterval: z
-            .int()
+        hcInterval: z.number().int()
             .positive()
             .min(5, { message: t("healthCheckIntervalMin") }),
-        hcTimeout: z
-            .int()
+        hcTimeout: z.number().int()
             .positive()
             .min(1, { message: t("healthCheckTimeoutMin") }),
-        hcStatus: z.int().positive().min(100).optional().nullable(),
+        hcStatus: z.number().int().positive().min(100).optional().nullable(),
         hcHeaders: z
             .array(z.object({ name: z.string(), value: z.string() }))
             .nullable()
@@ -110,7 +108,7 @@ export default function HealthCheckDialog({
             ),
         hcFollowRedirects: z.boolean(),
         hcMode: z.string(),
-        hcUnhealthyInterval: z.int().positive().min(5),
+        hcUnhealthyInterval: z.number().int().positive().min(5),
         hcTlsServerName: z.string()
     });
 

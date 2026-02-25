@@ -46,7 +46,7 @@ const verifyResourceSessionSchema = z.object({
     sessions: z.record(z.string(), z.string()).optional(),
     headers: z.record(z.string(), z.string()).optional(),
     query: z.record(z.string(), z.string()).optional(),
-    originalRequestURL: z.url(),
+    originalRequestURL: z.string().url(),
     scheme: z.string(),
     host: z.string(),
     path: z.string(),

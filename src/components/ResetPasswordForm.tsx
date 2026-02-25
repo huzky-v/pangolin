@@ -47,7 +47,7 @@ import { cleanRedirect } from "@app/lib/cleanRedirect";
 import { useTranslations } from "next-intl";
 
 const requestSchema = z.object({
-    email: z.email()
+    email: z.string().email()
 });
 
 export type ResetPasswordFormProps = {
@@ -89,7 +89,7 @@ export default function ResetPasswordForm({
 
     const formSchema = z
         .object({
-            email: z.email({ message: t("emailInvalid") }),
+            email: z.string().email({ message: t("emailInvalid") }),
             token: z.string().min(8, { message: t("tokenInvalid") }),
             password: passwordSchema,
             confirmPassword: passwordSchema

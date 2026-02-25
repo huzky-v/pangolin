@@ -22,7 +22,7 @@ import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 import { GetLoginPageResponse } from "@server/routers/loginPage/types";
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     orgId: z.string()
 });
 

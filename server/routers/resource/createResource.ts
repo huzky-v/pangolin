@@ -25,7 +25,7 @@ import { createCertificate } from "#dynamic/routers/certificates/createCertifica
 import { getUniqueResourceName } from "@server/db/names";
 import { validateAndConstructDomain } from "@server/lib/domainUtils";
 
-const createResourceParamsSchema = z.strictObject({
+const createResourceParamsSchema = z.object({
     orgId: z.string()
 });
 
@@ -47,7 +47,7 @@ const createHttpResourceSchema = z
             return true;
         },
         {
-            error: "Invalid subdomain"
+            message: "Invalid subdomain"
         }
     );
 
@@ -56,7 +56,7 @@ const createRawResourceSchema = z
         name: z.string().min(1).max(255),
         http: z.boolean(),
         protocol: z.enum(["tcp", "udp"]),
-        proxyPort: z.int().min(1).max(65535)
+        proxyPort: z.number().int().min(1).max(65535)
         // enableProxy: z.boolean().default(true) // always true now
     })
     .refine(
@@ -69,7 +69,7 @@ const createRawResourceSchema = z
             return true;
         },
         {
-            error: "Raw resources are not allowed"
+            message: "Raw resources are not allowed"
         }
     );
 

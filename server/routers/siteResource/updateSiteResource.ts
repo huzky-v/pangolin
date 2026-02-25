@@ -33,19 +33,19 @@ import {
     rebuildClientAssociationsFromSiteResource
 } from "@server/lib/rebuildClientAssociations";
 
-const updateSiteResourceParamsSchema = z.strictObject({
-    siteResourceId: z.string().transform(Number).pipe(z.int().positive())
+const updateSiteResourceParamsSchema = z.object({
+    siteResourceId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 const updateSiteResourceSchema = z
     .strictObject({
         name: z.string().min(1).max(255).optional(),
-        siteId: z.int(),
+        siteId: z.number().int(),
         // mode: z.enum(["host", "cidr", "port"]).optional(),
         mode: z.enum(["host", "cidr"]).optional(),
         // protocol: z.enum(["tcp", "udp"]).nullish(),
-        // proxyPort: z.int().positive().nullish(),
-        // destinationPort: z.int().positive().nullish(),
+        // proxyPort: z.number().int().positive().nullish(),
+        // destinationPort: z.number().int().positive().nullish(),
         destination: z.string().min(1).optional(),
         enabled: z.boolean().optional(),
         alias: z
@@ -56,8 +56,8 @@ const updateSiteResourceSchema = z
             )
             .nullish(),
         userIds: z.array(z.string()),
-        roleIds: z.array(z.int()),
-        clientIds: z.array(z.int()),
+        roleIds: z.array(z.number().int()),
+        clientIds: z.array(z.number().int()),
         tcpPortRangeString: portRangeStringSchema,
         udpPortRangeString: portRangeStringSchema,
         disableIcmp: z.boolean().optional()
@@ -67,8 +67,8 @@ const updateSiteResourceSchema = z
         (data) => {
             if (data.mode === "host" && data.destination) {
                 const isValidIP = z
-                    // .union([z.ipv4(), z.ipv6()])
-                    .union([z.ipv4()]) // for now lets just do ipv4 until we verify ipv6 works everywhere
+                    // .union([z.string().ip({ version: "v4" }), z.string().ip({ version: "v6" })])
+                    z.string().ip({ version: "v4" }) // for now lets just do ipv4 until we verify ipv6 works everywhere
                     .safeParse(data.destination).success;
 
                 if (isValidIP) {
@@ -98,7 +98,7 @@ const updateSiteResourceSchema = z
             if (data.mode === "cidr" && data.destination) {
                 // Check if it's a valid CIDR (v4 or v6)
                 const isValidCIDR = z
-                    .union([z.cidrv4(), z.cidrv6()])
+                    .union([z.string().cidr({ version: "v4" }), z.string().cidr({ version: "v6" })])
                     .safeParse(data.destination).success;
                 return isValidCIDR;
             }
@@ -220,7 +220,7 @@ export async function updateSiteResource(
 
         // Only check if destination is an IP address
         const isIp = z
-            .union([z.ipv4(), z.ipv6()])
+            .union([z.string().ip({ version: "v4" }), z.string().ip({ version: "v6" })])
             .safeParse(destination).success;
         if (
             isIp &&

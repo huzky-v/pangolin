@@ -23,7 +23,7 @@ import config from "@server/lib/config";
 import { fromError } from "zod-validation-error";
 import stripe from "#private/lib/stripe";
 
-const createPortalSessionSchema = z.strictObject({
+const createPortalSessionSchema = z.object({
     orgId: z.string()
 });
 

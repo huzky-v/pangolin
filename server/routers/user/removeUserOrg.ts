@@ -15,7 +15,7 @@ import { build } from "@server/build";
 import { UserType } from "@server/types/UserTypes";
 import { calculateUserClientsForOrgs } from "@server/lib/calculateUserClientsForOrgs";
 
-const removeUserSchema = z.strictObject({
+const removeUserSchema = z.object({
     userId: z.string(),
     orgId: z.string()
 });

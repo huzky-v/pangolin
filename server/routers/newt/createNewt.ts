@@ -23,7 +23,7 @@ export type CreateNewtResponse = {
     secret: string;
 };
 
-const createNewtSchema = z.strictObject({
+const createNewtSchema = z.object({
     newtId: z.string(),
     secret: z.string()
 });

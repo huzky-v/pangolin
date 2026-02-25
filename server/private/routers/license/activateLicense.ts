@@ -20,7 +20,7 @@ import license from "#private/license/license";
 import { z } from "zod";
 import { fromError } from "zod-validation-error";
 
-const bodySchema = z.strictObject({
+const bodySchema = z.object({
     licenseKey: z.string().min(1).max(255)
 });
 

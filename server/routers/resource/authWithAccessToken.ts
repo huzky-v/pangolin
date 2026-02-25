@@ -16,17 +16,17 @@ import stoi from "@server/lib/stoi";
 import { logAccessAudit } from "#dynamic/lib/logAccessAudit";
 import { normalizePostAuthPath } from "@server/lib/normalizePostAuthPath";
 
-const authWithAccessTokenBodySchema = z.strictObject({
+const authWithAccessTokenBodySchema = z.object({
     accessToken: z.string(),
     accessTokenId: z.string().optional()
 });
 
-const authWithAccessTokenParamsSchema = z.strictObject({
+const authWithAccessTokenParamsSchema = z.object({
     resourceId: z
         .string()
         .optional()
         .transform(stoi)
-        .pipe(z.int().positive().optional())
+        .pipe(z.number().int().positive().optional())
 });
 
 export type AuthWithAccessTokenResponse = {

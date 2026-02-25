@@ -23,7 +23,7 @@ import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 import { ListRemoteExitNodesResponse } from "@server/routers/remoteExitNode/types";
 
-const listRemoteExitNodesParamsSchema = z.strictObject({
+const listRemoteExitNodesParamsSchema = z.object({
     orgId: z.string()
 });
 
@@ -33,13 +33,13 @@ const listRemoteExitNodesSchema = z.object({
         .optional()
         .default("1000")
         .transform(Number)
-        .pipe(z.int().positive()),
+        .pipe(z.number().int().positive()),
     offset: z
         .string()
         .optional()
         .default("0")
         .transform(Number)
-        .pipe(z.int().nonnegative())
+        .pipe(z.number().int().nonnegative())
 });
 
 export function queryRemoteExitNodes(orgId: string) {

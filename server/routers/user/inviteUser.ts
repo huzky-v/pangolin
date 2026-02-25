@@ -21,12 +21,12 @@ import { FeatureId } from "@server/lib/billing";
 import { build } from "@server/build";
 import cache from "@server/lib/cache";
 
-const inviteUserParamsSchema = z.strictObject({
+const inviteUserParamsSchema = z.object({
     orgId: z.string()
 });
 
-const inviteUserBodySchema = z.strictObject({
-    email: z.email().toLowerCase(),
+const inviteUserBodySchema = z.object({
+    email: z.string().email().toLowerCase(),
     roleId: z.number(),
     validHours: z.number().gt(0).lte(168),
     sendEmail: z.boolean().optional(),

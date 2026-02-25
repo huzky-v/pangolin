@@ -3,12 +3,12 @@ import ipaddr from "ipaddr.js";
 
 export function isValidCIDR(cidr: string): boolean {
     return (
-        z.cidrv4().safeParse(cidr).success || z.cidrv6().safeParse(cidr).success
+        z.string().cidr({ version: "v4" }).safeParse(cidr).success || z.string().cidr({ version: "v6" }).safeParse(cidr).success
     );
 }
 
 export function isValidIP(ip: string): boolean {
-    return z.ipv4().safeParse(ip).success || z.ipv6().safeParse(ip).success;
+    return z.string().ip({ version: "v4" }).safeParse(ip).success || z.string().ip({ version: "v6" }).safeParse(ip).success;
 }
 
 export function isValidUrlGlobPattern(pattern: string): boolean {

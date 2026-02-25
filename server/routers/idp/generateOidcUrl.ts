@@ -19,11 +19,11 @@ import { tierMatrix } from "@server/lib/billing/tierMatrix";
 
 const paramsSchema = z
     .object({
-        idpId: z.coerce.number<number>()
+        idpId: z.coerce.number()
     })
     .strict();
 
-const bodySchema = z.strictObject({
+const bodySchema = z.object({
     redirectUrl: z.string()
 });
 

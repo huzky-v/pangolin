@@ -9,7 +9,7 @@ import createHttpError from "http-errors";
 import { z } from "zod";
 import { fromError } from "zod-validation-error";
 
-const listRolesParamsSchema = z.strictObject({
+const listRolesParamsSchema = z.object({
     orgId: z.string()
 });
 
@@ -19,13 +19,13 @@ const listRolesSchema = z.object({
         .optional()
         .default("1000")
         .transform(Number)
-        .pipe(z.int().nonnegative()),
+        .pipe(z.number().int().nonnegative()),
     offset: z
         .string()
         .optional()
         .default("0")
         .transform(Number)
-        .pipe(z.int().nonnegative())
+        .pipe(z.number().int().nonnegative())
 });
 
 async function queryRoles(orgId: string, limit: number, offset: number) {

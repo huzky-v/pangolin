@@ -9,7 +9,7 @@ import { buildClientConfigurationForNewtClient } from "./buildConfiguration";
 
 const inputSchema = z.object({
     publicKey: z.string(),
-    port: z.int().positive()
+    port: z.number().int().positive()
 });
 
 type Input = z.infer<typeof inputSchema>;

@@ -21,7 +21,7 @@ import { fromError } from "zod-validation-error";
 import { z } from "zod";
 import { PickRemoteExitNodeDefaultsResponse } from "@server/routers/remoteExitNode/types";
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     orgId: z.string()
 });
 

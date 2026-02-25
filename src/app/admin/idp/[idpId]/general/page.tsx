@@ -63,8 +63,8 @@ export default function GeneralPage() {
         clientSecret: z
             .string()
             .min(1, { message: t("idpClientSecretRequired") }),
-        authUrl: z.url({ message: t("idpErrorAuthUrlInvalid") }),
-        tokenUrl: z.url({ message: t("idpErrorTokenUrlInvalid") }),
+        authUrl: z.string().url({ message: t("idpErrorAuthUrlInvalid") }),
+        tokenUrl: z.string().url({ message: t("idpErrorTokenUrlInvalid") }),
         identifierPath: z.string().min(1, { message: t("idpPathRequired") }),
         emailPath: z.string().optional(),
         namePath: z.string().optional(),

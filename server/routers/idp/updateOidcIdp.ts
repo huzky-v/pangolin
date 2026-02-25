@@ -14,11 +14,11 @@ import config from "@server/lib/config";
 
 const paramsSchema = z
     .object({
-        idpId: z.coerce.number<number>()
+        idpId: z.coerce.number()
     })
     .strict();
 
-const bodySchema = z.strictObject({
+const bodySchema = z.object({
     name: z.string().optional(),
     clientId: z.string().optional(),
     clientSecret: z.string().optional(),

@@ -68,7 +68,7 @@ export default function Page() {
             .min(2, { message: t("nameMin", { len: 2 }) })
             .max(30, { message: t("nameMax", { len: 30 }) }),
         method: z.enum(["olm"]),
-        subnet: z.union([z.ipv4(), z.ipv6()]).refine((val) => val.length > 0, {
+        subnet: z.union([z.string().ip({ version: "v4" }), z.string().ip({ version: "v6" })]).refine((val) => val.length > 0, {
             message: t("subnetRequired")
         })
     });

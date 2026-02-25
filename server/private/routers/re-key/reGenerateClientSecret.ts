@@ -27,11 +27,11 @@ import { disconnectClient, sendToClient } from "#private/routers/ws";
 import { OlmErrorCodes, sendOlmError } from "@server/routers/olm/error";
 import { sendTerminateClient } from "@server/routers/client/terminate";
 
-const reGenerateSecretParamsSchema = z.strictObject({
-    clientId: z.string().transform(Number).pipe(z.int().positive())
+const reGenerateSecretParamsSchema = z.object({
+    clientId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
-const reGenerateSecretBodySchema = z.strictObject({
+const reGenerateSecretBodySchema = z.object({
     // olmId: z.string().min(1).optional(),
     secret: z.string().min(1),
     disconnect: z.boolean().optional().default(true)

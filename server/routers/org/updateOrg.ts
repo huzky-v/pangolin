@@ -15,7 +15,7 @@ import { isLicensedOrSubscribed } from "#dynamic/lib/isLicencedOrSubscribed";
 import { TierFeature, tierMatrix } from "@server/lib/billing/tierMatrix";
 import { getOrgTierData } from "#dynamic/lib/billing";
 
-const updateOrgParamsSchema = z.strictObject({
+const updateOrgParamsSchema = z.object({
     orgId: z.string()
 });
 
@@ -39,7 +39,7 @@ const updateOrgBodySchema = z
             .optional()
     })
     .refine((data) => Object.keys(data).length > 0, {
-        error: "At least one field must be provided for update"
+        message: "At least one field must be provided for update"
     });
 
 registry.registerPath({

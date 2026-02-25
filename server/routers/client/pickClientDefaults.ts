@@ -15,7 +15,7 @@ export type PickClientDefaultsResponse = {
     subnet: string;
 };
 
-const pickClientDefaultsSchema = z.strictObject({
+const pickClientDefaultsSchema = z.object({
     orgId: z.string()
 });
 

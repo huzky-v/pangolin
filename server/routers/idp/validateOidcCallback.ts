@@ -43,7 +43,7 @@ const ensureTrailingSlash = (url: string): string => {
 
 const paramsSchema = z
     .object({
-        idpId: z.coerce.number<number>()
+        idpId: z.coerce.number()
     })
     .strict();
 
@@ -54,7 +54,7 @@ const bodySchema = z.object({
 });
 
 const querySchema = z.object({
-    loginPageId: z.coerce.number<number>().optional()
+    loginPageId: z.coerce.number().optional()
 });
 
 export type ValidateOidcUrlCallbackResponse = {

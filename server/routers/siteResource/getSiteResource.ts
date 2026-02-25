@@ -10,14 +10,14 @@ import { fromError } from "zod-validation-error";
 import logger from "@server/logger";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const getSiteResourceParamsSchema = z.strictObject({
+const getSiteResourceParamsSchema = z.object({
     siteResourceId: z
         .string()
         .optional()
         .transform((val) => (val ? Number(val) : undefined))
-        .pipe(z.int().positive().optional())
+        .pipe(z.number().int().positive().optional())
         .optional(),
-    siteId: z.string().transform(Number).pipe(z.int().positive()),
+    siteId: z.string().transform(Number).pipe(z.number().int().positive()),
     niceId: z.string().optional(),
     orgId: z.string()
 });

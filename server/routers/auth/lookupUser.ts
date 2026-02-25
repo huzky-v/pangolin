@@ -18,7 +18,7 @@ import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 import { UserType } from "@server/types/UserTypes";
 
-const lookupBodySchema = z.strictObject({
+const lookupBodySchema = z.object({
     identifier: z.string().min(1).toLowerCase()
 });
 

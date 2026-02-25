@@ -11,8 +11,8 @@ import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 import { isValidCIDR } from "@server/lib/validators";
 
-const updateSiteParamsSchema = z.strictObject({
-    siteId: z.string().transform(Number).pipe(z.int().positive())
+const updateSiteParamsSchema = z.object({
+    siteId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 const updateSiteBodySchema = z
@@ -34,7 +34,7 @@ const updateSiteBodySchema = z
         // megabytesOut: z.number().int().nonnegative().optional(),
     })
     .refine((data) => Object.keys(data).length > 0, {
-        error: "At least one field must be provided for update"
+        message: "At least one field must be provided for update"
     });
 
 registry.registerPath({

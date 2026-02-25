@@ -56,20 +56,20 @@ export const privateConfigSchema = z.object({
                 .transform(getEnvOrYaml("FOSSORIAL_API_KEY"))
         })
         .optional()
-        .prefault({}),
+        .default({}),
     redis: z
         .object({
             host: z.string(),
             port: portSchema,
             password: z.string().optional(),
-            db: z.int().nonnegative().optional().default(0),
+            db: z.number().int().nonnegative().optional().default(0),
             replicas: z
                 .array(
                     z.object({
                         host: z.string(),
                         port: portSchema,
                         password: z.string().optional(),
-                        db: z.int().nonnegative().optional().default(0)
+                        db: z.number().int().nonnegative().optional().default(0)
                     })
                 )
                 .optional()
@@ -91,7 +91,7 @@ export const privateConfigSchema = z.object({
                 .default("http://gerbil:3004")
         })
         .optional()
-        .prefault({}),
+        .default({}),
     flags: z
         .object({
             enable_redis: z.boolean().optional().default(false),
@@ -99,7 +99,7 @@ export const privateConfigSchema = z.object({
             use_org_only_idp: z.boolean().optional()
         })
         .optional()
-        .prefault({}),
+        .default({}),
     branding: z
         .object({
             app_name: z.string().optional(),

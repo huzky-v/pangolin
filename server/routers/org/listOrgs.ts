@@ -7,7 +7,7 @@ import HttpCode from "@server/types/HttpCode";
 import createHttpError from "http-errors";
 import { sql, inArray, eq } from "drizzle-orm";
 import logger from "@server/logger";
-import { fromZodError } from "zod-validation-error";
+import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 
 const listOrgsSchema = z.object({
@@ -16,13 +16,13 @@ const listOrgsSchema = z.object({
         .optional()
         .default("1000")
         .transform(Number)
-        .pipe(z.int().positive()),
+        .pipe(z.number().int().positive()),
     offset: z
         .string()
         .optional()
         .default("0")
         .transform(Number)
-        .pipe(z.int().nonnegative())
+        .pipe(z.number().int().nonnegative())
 });
 
 registry.registerPath({
@@ -52,7 +52,7 @@ export async function listOrgs(
             return next(
                 createHttpError(
                     HttpCode.BAD_REQUEST,
-                    fromZodError(parsedQuery.error)
+                    fromError(parsedQuery.error)
                 )
             );
         }

@@ -10,11 +10,11 @@ import { eq, and } from "drizzle-orm";
 import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const updateClientParamsSchema = z.strictObject({
-    clientId: z.string().transform(Number).pipe(z.int().positive())
+const updateClientParamsSchema = z.object({
+    clientId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
-const updateClientSchema = z.strictObject({
+const updateClientSchema = z.object({
     name: z.string().min(1).max(255).optional(),
     niceId: z.string().min(1).max(255).optional()
 });

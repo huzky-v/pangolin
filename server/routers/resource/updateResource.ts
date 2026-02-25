@@ -26,8 +26,8 @@ import { build } from "@server/build";
 import { isLicensedOrSubscribed } from "#dynamic/lib/isLicencedOrSubscribed";
 import { tierMatrix } from "@server/lib/billing/tierMatrix";
 
-const updateResourceParamsSchema = z.strictObject({
-    resourceId: z.string().transform(Number).pipe(z.int().positive())
+const updateResourceParamsSchema = z.object({
+    resourceId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 const updateHttpResourceBodySchema = z
@@ -45,9 +45,9 @@ const updateHttpResourceBodySchema = z
         stickySession: z.boolean().optional(),
         tlsServerName: z.string().nullable().optional(),
         setHostHeader: z.string().nullable().optional(),
-        skipToIdpId: z.int().positive().nullable().optional(),
+        skipToIdpId: z.number().int().positive().nullable().optional(),
         headers: z
-            .array(z.strictObject({ name: z.string(), value: z.string() }))
+            .array(z.object({ name: z.string(), value: z.string() }))
             .nullable()
             .optional(),
         // Maintenance mode fields
@@ -59,7 +59,7 @@ const updateHttpResourceBodySchema = z
         postAuthPath: z.string().nullable().optional()
     })
     .refine((data) => Object.keys(data).length > 0, {
-        error: "At least one field must be provided for update"
+        message: "At least one field must be provided for update"
     })
     .refine(
         (data) => {
@@ -69,7 +69,7 @@ const updateHttpResourceBodySchema = z
             return true;
         },
         {
-            error: "Invalid subdomain"
+            message: "Invalid subdomain"
         }
     )
     .refine(
@@ -80,7 +80,7 @@ const updateHttpResourceBodySchema = z
             return true;
         },
         {
-            error: "Invalid TLS Server Name. Use domain name format, or save empty to remove the TLS Server Name."
+            message: "Invalid TLS Server Name. Use domain name format, or save empty to remove the TLS Server Name."
         }
     )
     .refine(
@@ -91,7 +91,7 @@ const updateHttpResourceBodySchema = z
             return true;
         },
         {
-            error: "Invalid custom Host Header value. Use domain name format, or save empty to unset custom Host Header."
+            message: "Invalid custom Host Header value. Use domain name format, or save empty to unset custom Host Header."
         }
     );
 
@@ -101,14 +101,14 @@ const updateRawResourceBodySchema = z
     .strictObject({
         name: z.string().min(1).max(255).optional(),
         niceId: z.string().min(1).max(255).optional(),
-        proxyPort: z.int().min(1).max(65535).optional(),
+        proxyPort: z.number().int().min(1).max(65535).optional(),
         stickySession: z.boolean().optional(),
         enabled: z.boolean().optional(),
         proxyProtocol: z.boolean().optional(),
-        proxyProtocolVersion: z.int().min(1).optional()
+        proxyProtocolVersion: z.number().int().min(1).optional()
     })
     .refine((data) => Object.keys(data).length > 0, {
-        error: "At least one field must be provided for update"
+        message: "At least one field must be provided for update"
     })
     .refine(
         (data) => {
@@ -120,7 +120,7 @@ const updateRawResourceBodySchema = z
             return true;
         },
         {
-            error: "Cannot update proxyPort"
+            message: "Cannot update proxyPort"
         }
     );
 

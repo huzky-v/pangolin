@@ -10,11 +10,11 @@ import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const updateUser2FAParamsSchema = z.strictObject({
+const updateUser2FAParamsSchema = z.object({
     userId: z.string()
 });
 
-const updateUser2FABodySchema = z.strictObject({
+const updateUser2FABodySchema = z.object({
     twoFactorSetupRequested: z.boolean()
 });
 

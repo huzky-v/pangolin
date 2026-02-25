@@ -28,7 +28,7 @@ import { response } from "@server/lib/response";
 import { encrypt } from "@server/lib/crypto";
 import config from "@server/lib/config";
 
-const paramsSchema = z.strictObject({});
+const paramsSchema = z.object({});
 
 export type GetSessionTransferTokenRenponse = {
     token: string;

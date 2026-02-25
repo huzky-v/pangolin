@@ -23,7 +23,7 @@ import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 import { GetRemoteExitNodeResponse } from "@server/routers/remoteExitNode/types";
 
-const getRemoteExitNodeSchema = z.strictObject({
+const getRemoteExitNodeSchema = z.object({
     orgId: z.string().min(1),
     remoteExitNodeId: z.string().min(1)
 });

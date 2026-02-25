@@ -12,8 +12,8 @@ import { isLicensedOrSubscribed } from "#dynamic/lib/isLicencedOrSubscribed";
 import { OpenAPITags, registry } from "@server/openApi";
 import { tierMatrix } from "@server/lib/billing/tierMatrix";
 
-const updateRoleParamsSchema = z.strictObject({
-    roleId: z.string().transform(Number).pipe(z.int().positive())
+const updateRoleParamsSchema = z.object({
+    roleId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 const updateRoleBodySchema = z
@@ -23,7 +23,7 @@ const updateRoleBodySchema = z
         requireDeviceApproval: z.boolean().optional()
     })
     .refine((data) => Object.keys(data).length > 0, {
-        error: "At least one field must be provided for update"
+        message: "At least one field must be provided for update"
     });
 
 export type UpdateRoleBody = z.infer<typeof updateRoleBodySchema>;

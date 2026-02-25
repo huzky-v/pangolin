@@ -70,7 +70,7 @@ export default function NewPricingLicenseForm({
     );
 
     const personalFormSchema = z.object({
-        email: z.email(),
+        email: z.string().email(),
         firstName: z.string().min(1),
         lastName: z.string().min(1),
         primaryUse: z.string().min(1),
@@ -81,7 +81,7 @@ export default function NewPricingLicenseForm({
     });
 
     const businessFormSchema = z.object({
-        email: z.email(),
+        email: z.string().email(),
         firstName: z.string().min(1),
         lastName: z.string().min(1),
         primaryUse: z.string().min(1),

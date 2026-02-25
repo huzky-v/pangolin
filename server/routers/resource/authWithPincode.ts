@@ -14,12 +14,12 @@ import { verifyPassword } from "@server/auth/password";
 import config from "@server/lib/config";
 import { logAccessAudit } from "#dynamic/lib/logAccessAudit";
 
-export const authWithPincodeBodySchema = z.strictObject({
+export const authWithPincodeBodySchema = z.object({
     pincode: z.string()
 });
 
-export const authWithPincodeParamsSchema = z.strictObject({
-    resourceId: z.string().transform(Number).pipe(z.int().positive())
+export const authWithPincodeParamsSchema = z.object({
+    resourceId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 export type AuthWithPincodeResponse = {

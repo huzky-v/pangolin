@@ -7,27 +7,27 @@ import HttpCode from "@server/types/HttpCode";
 import createHttpError from "http-errors";
 import { and, sql } from "drizzle-orm";
 import logger from "@server/logger";
-import { fromZodError } from "zod-validation-error";
+import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 import { eq } from "drizzle-orm";
 
-const listUsersParamsSchema = z.strictObject({
+const listUsersParamsSchema = z.object({
     orgId: z.string()
 });
 
-const listUsersSchema = z.strictObject({
+const listUsersSchema = z.object({
     limit: z
         .string()
         .optional()
         .default("1000")
         .transform(Number)
-        .pipe(z.int().nonnegative()),
+        .pipe(z.number().int().nonnegative()),
     offset: z
         .string()
         .optional()
         .default("0")
         .transform(Number)
-        .pipe(z.int().nonnegative())
+        .pipe(z.number().int().nonnegative())
 });
 
 async function queryUsers(orgId: string, limit: number, offset: number) {
@@ -88,7 +88,7 @@ export async function listUsers(
             return next(
                 createHttpError(
                     HttpCode.BAD_REQUEST,
-                    fromZodError(parsedQuery.error)
+                    fromError(parsedQuery.error)
                 )
             );
         }
@@ -99,7 +99,7 @@ export async function listUsers(
             return next(
                 createHttpError(
                     HttpCode.BAD_REQUEST,
-                    fromZodError(parsedParams.error)
+                    fromError(parsedParams.error)
                 )
             );
         }

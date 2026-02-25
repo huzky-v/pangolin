@@ -7,9 +7,9 @@ import { response } from "@server/lib/response";
 import { validateResourceSessionToken } from "@server/auth/sessions/resource";
 import logger from "@server/logger";
 
-export const params = z.strictObject({
+export const params = z.object({
     token: z.string(),
-    resourceId: z.string().transform(Number).pipe(z.int().positive())
+    resourceId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 export type CheckResourceSessionParams = z.infer<typeof params>;

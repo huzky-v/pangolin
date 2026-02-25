@@ -116,25 +116,25 @@ async function clearChallenge(sessionId: string) {
         .where(eq(webauthnChallenge.sessionId, sessionId));
 }
 
-export const registerSecurityKeyBody = z.strictObject({
+export const registerSecurityKeyBody = z.object({
     name: z.string().min(1),
     password: z.string().min(1),
     code: z.string().optional()
 });
 
-export const verifyRegistrationBody = z.strictObject({
+export const verifyRegistrationBody = z.object({
     credential: z.any()
 });
 
-export const startAuthenticationBody = z.strictObject({
-    email: z.email().optional()
+export const startAuthenticationBody = z.object({
+    email: z.string().email().optional()
 });
 
-export const verifyAuthenticationBody = z.strictObject({
+export const verifyAuthenticationBody = z.object({
     credential: z.any()
 });
 
-export const deleteSecurityKeyBody = z.strictObject({
+export const deleteSecurityKeyBody = z.object({
     password: z.string().min(1),
     code: z.string().optional()
 });

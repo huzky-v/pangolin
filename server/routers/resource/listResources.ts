@@ -19,10 +19,10 @@ import HttpCode from "@server/types/HttpCode";
 import createHttpError from "http-errors";
 import { sql, eq, or, inArray, and, count } from "drizzle-orm";
 import logger from "@server/logger";
-import { fromZodError } from "zod-validation-error";
+import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const listResourcesParamsSchema = z.strictObject({
+const listResourcesParamsSchema = z.object({
     orgId: z.string()
 });
 
@@ -32,14 +32,14 @@ const listResourcesSchema = z.object({
         .optional()
         .default("1000")
         .transform(Number)
-        .pipe(z.int().nonnegative()),
+        .pipe(z.number().int().nonnegative()),
 
     offset: z
         .string()
         .optional()
         .default("0")
         .transform(Number)
-        .pipe(z.int().nonnegative())
+        .pipe(z.number().int().nonnegative())
 });
 
 // (resource fields + a single joined target)
@@ -186,7 +186,7 @@ export async function listResources(
             return next(
                 createHttpError(
                     HttpCode.BAD_REQUEST,
-                    fromZodError(parsedQuery.error)
+                    fromError(parsedQuery.error)
                 )
             );
         }
@@ -197,7 +197,7 @@ export async function listResources(
             return next(
                 createHttpError(
                     HttpCode.BAD_REQUEST,
-                    fromZodError(parsedParams.error)
+                    fromError(parsedParams.error)
                 )
             );
         }

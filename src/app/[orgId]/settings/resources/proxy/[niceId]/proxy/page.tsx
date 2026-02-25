@@ -1030,7 +1030,7 @@ function ProxyResourceHttpForm({
             .array(z.object({ name: z.string(), value: z.string() }))
             .nullable(),
         proxyProtocol: z.boolean().optional(),
-        proxyProtocolVersion: z.int().min(1).max(2).optional()
+        proxyProtocolVersion: z.number().int().min(1).max(2).optional()
     });
 
     const proxySettingsForm = useForm({
@@ -1302,7 +1302,7 @@ function ProxyResourceProtocolForm({
             .array(z.object({ name: z.string(), value: z.string() }))
             .nullable(),
         proxyProtocol: z.boolean().optional(),
-        proxyProtocolVersion: z.int().min(1).max(2).optional()
+        proxyProtocolVersion: z.number().int().min(1).max(2).optional()
     });
 
     const proxySettingsForm = useForm({

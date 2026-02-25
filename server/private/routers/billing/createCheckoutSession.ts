@@ -30,11 +30,11 @@ import {
 import { getLineItems } from "@server/lib/billing/getLineItems";
 import Stripe from "stripe";
 
-const createCheckoutSessionSchema = z.strictObject({
+const createCheckoutSessionSchema = z.object({
     orgId: z.string()
 });
 
-const createCheckoutSessionBodySchema = z.strictObject({
+const createCheckoutSessionBodySchema = z.object({
     tier: z.enum(["tier1", "tier2", "tier3"])
 });
 

@@ -26,11 +26,11 @@ import { addPeer, deletePeer } from "@server/routers/gerbil/peers";
 import { getAllowedIps } from "@server/routers/target/helpers";
 import { disconnectClient, sendToClient } from "#private/routers/ws";
 
-const updateSiteParamsSchema = z.strictObject({
-    siteId: z.string().transform(Number).pipe(z.int().positive())
+const updateSiteParamsSchema = z.object({
+    siteId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
-const updateSiteBodySchema = z.strictObject({
+const updateSiteBodySchema = z.object({
     type: z.enum(["newt", "wireguard"]),
     secret: z.string().min(1).max(255).optional(),
     pubKey: z.string().optional(),

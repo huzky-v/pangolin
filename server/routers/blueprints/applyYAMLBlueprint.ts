@@ -5,7 +5,7 @@ import { NextFunction, Request, Response } from "express";
 import logger from "@server/logger";
 import createHttpError from "http-errors";
 import HttpCode from "@server/types/HttpCode";
-import { fromZodError } from "zod-validation-error";
+import { fromError } from "zod-validation-error";
 import response from "@server/lib/response";
 import { type Blueprint } from "@server/db";
 import { parse as parseYaml } from "yaml";
@@ -68,7 +68,7 @@ export async function applyYAMLBlueprint(
             return next(
                 createHttpError(
                     HttpCode.BAD_REQUEST,
-                    fromZodError(parsedParams.error)
+                    fromError(parsedParams.error)
                 )
             );
         }
@@ -80,7 +80,7 @@ export async function applyYAMLBlueprint(
             return next(
                 createHttpError(
                     HttpCode.BAD_REQUEST,
-                    fromZodError(parsedBody.error)
+                    fromError(parsedBody.error)
                 )
             );
         }
@@ -96,7 +96,7 @@ export async function applyYAMLBlueprint(
             return next(
                 createHttpError(
                     HttpCode.BAD_REQUEST,
-                    fromZodError(validationResult.error)
+                    fromError(validationResult.error)
                 )
             );
         }

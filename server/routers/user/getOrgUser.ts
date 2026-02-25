@@ -46,7 +46,7 @@ export type GetOrgUserResponse = NonNullable<
     Awaited<ReturnType<typeof queryUser>>
 >;
 
-const getOrgUserParamsSchema = z.strictObject({
+const getOrgUserParamsSchema = z.object({
     userId: z.string(),
     orgId: z.string()
 });

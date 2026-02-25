@@ -14,7 +14,7 @@ import createHttpError from "http-errors";
 import { sql, eq, or, inArray, and, count, isNull, lt, gt } from "drizzle-orm";
 import logger from "@server/logger";
 import stoi from "@server/lib/stoi";
-import { fromZodError } from "zod-validation-error";
+import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 
 const listAccessTokensParamsSchema = z
@@ -23,11 +23,11 @@ const listAccessTokensParamsSchema = z
             .string()
             .optional()
             .transform(stoi)
-            .pipe(z.int().positive().optional()),
+            .pipe(z.number().int().positive().optional()),
         orgId: z.string().optional()
     })
     .refine((data) => !!data.resourceId !== !!data.orgId, {
-        error: "Either resourceId or orgId must be provided, but not both"
+        message: "Either resourceId or orgId must be provided, but not both"
     });
 
 const listAccessTokensSchema = z.object({
@@ -36,14 +36,14 @@ const listAccessTokensSchema = z.object({
         .optional()
         .default("1000")
         .transform(Number)
-        .pipe(z.int().nonnegative()),
+        .pipe(z.number().int().nonnegative()),
 
     offset: z
         .string()
         .optional()
         .default("0")
         .transform(Number)
-        .pipe(z.int().nonnegative())
+        .pipe(z.number().int().nonnegative())
 });
 
 function queryAccessTokens(
@@ -157,7 +157,7 @@ export async function listAccessTokens(
             return next(
                 createHttpError(
                     HttpCode.BAD_REQUEST,
-                    fromZodError(parsedQuery.error)
+                    fromError(parsedQuery.error)
                 )
             );
         }
@@ -168,7 +168,7 @@ export async function listAccessTokens(
             return next(
                 createHttpError(
                     HttpCode.BAD_REQUEST,
-                    fromZodError(parsedParams.error)
+                    fromError(parsedParams.error)
                 )
             );
         }

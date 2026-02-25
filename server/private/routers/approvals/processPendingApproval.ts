@@ -22,12 +22,12 @@ import response from "@server/lib/response";
 import { and, eq, type InferInsertModel } from "drizzle-orm";
 import type { NextFunction, Request, Response } from "express";
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     orgId: z.string(),
-    approvalId: z.string().transform(Number).pipe(z.int().positive())
+    approvalId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
-const bodySchema = z.strictObject({
+const bodySchema = z.object({
     decision: z.enum(["approved", "denied"])
 });
 

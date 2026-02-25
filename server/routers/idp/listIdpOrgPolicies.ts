@@ -11,22 +11,22 @@ import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 
 const paramsSchema = z.object({
-    idpId: z.coerce.number<number>()
+    idpId: z.coerce.number()
 });
 
-const querySchema = z.strictObject({
+const querySchema = z.object({
     limit: z
         .string()
         .optional()
         .default("1000")
         .transform(Number)
-        .pipe(z.int().nonnegative()),
+        .pipe(z.number().int().nonnegative()),
     offset: z
         .string()
         .optional()
         .default("0")
         .transform(Number)
-        .pipe(z.int().nonnegative())
+        .pipe(z.number().int().nonnegative())
 });
 
 async function query(idpId: number, limit: number, offset: number) {

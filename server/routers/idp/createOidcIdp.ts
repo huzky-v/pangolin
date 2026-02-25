@@ -12,14 +12,14 @@ import { generateOidcRedirectUrl } from "@server/lib/idp/generateRedirectUrl";
 import { encrypt } from "@server/lib/crypto";
 import config from "@server/lib/config";
 
-const paramsSchema = z.strictObject({});
+const paramsSchema = z.object({});
 
-const bodySchema = z.strictObject({
+const bodySchema = z.object({
     name: z.string().nonempty(),
     clientId: z.string().nonempty(),
     clientSecret: z.string().nonempty(),
-    authUrl: z.url(),
-    tokenUrl: z.url(),
+    authUrl: z.string().url(),
+    tokenUrl: z.string().url(),
     identifierPath: z.string().nonempty(),
     emailPath: z.string().optional(),
     namePath: z.string().optional(),

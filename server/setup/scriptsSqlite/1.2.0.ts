@@ -5,7 +5,7 @@ import fs from "fs";
 import yaml from "js-yaml";
 import path from "path";
 import { z } from "zod";
-import { fromZodError } from "zod-validation-error";
+import { fromError } from "zod-validation-error";
 
 const version = "1.2.0";
 
@@ -91,7 +91,7 @@ export default async function migration() {
         const parsedConfig = schema.safeParse(traefikConfig);
 
         if (!parsedConfig.success) {
-            throw new Error(fromZodError(parsedConfig.error).toString());
+            throw new Error(fromError(parsedConfig.error).toString());
         }
 
         traefikConfig.experimental.plugins.badger.version = "v1.1.0";

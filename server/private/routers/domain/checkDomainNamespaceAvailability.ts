@@ -23,9 +23,9 @@ import { db, domainNamespaces, resources } from "@server/db";
 import { inArray } from "drizzle-orm";
 import { CheckDomainAvailabilityResponse } from "@server/routers/domain/types";
 
-const paramsSchema = z.strictObject({});
+const paramsSchema = z.object({});
 
-const querySchema = z.strictObject({
+const querySchema = z.object({
     subdomain: z.string()
 });
 

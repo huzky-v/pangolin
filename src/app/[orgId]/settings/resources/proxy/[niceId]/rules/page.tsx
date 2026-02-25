@@ -95,7 +95,7 @@ const addRuleSchema = z.object({
     action: z.enum(["ACCEPT", "DROP", "PASS"]),
     match: z.string(),
     value: z.string(),
-    priority: z.coerce.number<number>().int().optional()
+    priority: z.coerce.number().int().optional()
 });
 
 type LocalRule = ArrayElement<ListResourceRulesResponse["rules"]> & {

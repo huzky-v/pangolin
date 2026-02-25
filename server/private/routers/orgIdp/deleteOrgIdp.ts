@@ -27,7 +27,7 @@ import privateConfig from "#private/lib/config";
 const paramsSchema = z
     .object({
         orgId: z.string().optional(), // Optional; used with org idp in saas
-        idpId: z.coerce.number<number>()
+        idpId: z.coerce.number()
     })
     .strict();
 

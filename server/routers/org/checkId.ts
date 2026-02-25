@@ -9,7 +9,7 @@ import createHttpError from "http-errors";
 import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 
-const getOrgSchema = z.strictObject({
+const getOrgSchema = z.object({
     orgId: z.string()
 });
 

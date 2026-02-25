@@ -14,7 +14,7 @@ import {
 import logger from "@server/logger";
 import { hashPassword } from "@server/auth/password";
 
-const bodySchema = z.strictObject({
+const bodySchema = z.object({
     name: z.string().min(1).max(255)
 });
 

@@ -12,7 +12,7 @@ import stoi from "@server/lib/stoi";
 import { OpenAPITags, registry } from "@server/openApi";
 import { rebuildClientAssociationsFromClient } from "@server/lib/rebuildClientAssociations";
 
-const addUserRoleParamsSchema = z.strictObject({
+const addUserRoleParamsSchema = z.object({
     userId: z.string(),
     roleId: z.string().transform(stoi).pipe(z.number())
 });

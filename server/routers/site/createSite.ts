@@ -21,13 +21,13 @@ import { build } from "@server/build";
 import { usageService } from "@server/lib/billing/usageService";
 import { FeatureId } from "@server/lib/billing";
 
-const createSiteParamsSchema = z.strictObject({
+const createSiteParamsSchema = z.object({
     orgId: z.string()
 });
 
-const createSiteSchema = z.strictObject({
+const createSiteSchema = z.object({
     name: z.string().min(1).max(255),
-    exitNodeId: z.int().positive().optional(),
+    exitNodeId: z.number().int().positive().optional(),
     // subdomain: z
     //     .string()
     //     .min(1)

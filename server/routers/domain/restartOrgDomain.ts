@@ -8,7 +8,7 @@ import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 import { and, eq } from "drizzle-orm";
 
-const paramsSchema = z.strictObject({
+const paramsSchema = z.object({
     domainId: z.string(),
     orgId: z.string()
 });

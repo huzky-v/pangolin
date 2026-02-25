@@ -11,8 +11,8 @@ import logger from "@server/logger";
 import { OpenAPITags, registry } from "@server/openApi";
 import { rebuildClientAssociationsFromSiteResource } from "@server/lib/rebuildClientAssociations";
 
-const deleteSiteResourceParamsSchema = z.strictObject({
-    siteResourceId: z.string().transform(Number).pipe(z.int().positive())
+const deleteSiteResourceParamsSchema = z.object({
+    siteResourceId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
 export type DeleteSiteResourceResponse = {

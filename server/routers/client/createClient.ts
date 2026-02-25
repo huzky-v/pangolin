@@ -28,11 +28,11 @@ import { rebuildClientAssociationsFromClient } from "@server/lib/rebuildClientAs
 import { getUniqueClientName } from "@server/db/names";
 import { build } from "@server/build";
 
-const createClientParamsSchema = z.strictObject({
+const createClientParamsSchema = z.object({
     orgId: z.string()
 });
 
-const createClientSchema = z.strictObject({
+const createClientSchema = z.object({
     name: z.string().min(1).max(255),
     olmId: z.string(),
     secret: z.string(),

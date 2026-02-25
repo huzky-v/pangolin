@@ -10,23 +10,23 @@ import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 import { OpenAPITags, registry } from "@server/openApi";
 
-const listDomainsParamsSchema = z.strictObject({
+const listDomainsParamsSchema = z.object({
     orgId: z.string()
 });
 
-const listDomainsSchema = z.strictObject({
+const listDomainsSchema = z.object({
     limit: z
         .string()
         .optional()
         .default("1000")
         .transform(Number)
-        .pipe(z.int().nonnegative()),
+        .pipe(z.number().int().nonnegative()),
     offset: z
         .string()
         .optional()
         .default("0")
         .transform(Number)
-        .pipe(z.int().nonnegative())
+        .pipe(z.number().int().nonnegative())
 });
 
 async function queryDomains(orgId: string, limit: number, offset: number) {

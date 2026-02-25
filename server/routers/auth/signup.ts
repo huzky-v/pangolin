@@ -26,7 +26,7 @@ import { build } from "@server/build";
 import resend, { AudienceIds, moveEmailToAudience } from "#dynamic/lib/resend";
 
 export const signupBodySchema = z.object({
-    email: z.email().toLowerCase(),
+    email: z.string().email().toLowerCase(),
     password: passwordSchema,
     inviteToken: z.string().optional(),
     inviteId: z.string().optional(),

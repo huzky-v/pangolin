@@ -45,7 +45,7 @@ export type AuthPageCustomizationProps = {
 const AuthPageFormSchema = z.object({
     logoUrl: z.union([
         z.literal(""),
-        z.url("Must be a valid URL").superRefine(async (url, ctx) => {
+        z.string().url("Must be a valid URL").superRefine(async (url, ctx) => {
             try {
                 const response = await fetch(url, {
                     method: "HEAD"
@@ -91,8 +91,8 @@ const AuthPageFormSchema = z.object({
             }
         })
     ]),
-    logoWidth: z.coerce.number<number>().min(1),
-    logoHeight: z.coerce.number<number>().min(1),
+    logoWidth: z.coerce.number().min(1),
+    logoHeight: z.coerce.number().min(1),
     orgTitle: z.string().optional(),
     orgSubtitle: z.string().optional(),
     resourceTitle: z.string(),

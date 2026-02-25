@@ -14,10 +14,10 @@ import { hashPassword } from "@server/auth/password";
 import { OpenAPITags, registry } from "@server/openApi";
 
 const setResourceAuthMethodsParamsSchema = z.object({
-    resourceId: z.string().transform(Number).pipe(z.int().positive())
+    resourceId: z.string().transform(Number).pipe(z.number().int().positive())
 });
 
-const setResourceAuthMethodsBodySchema = z.strictObject({
+const setResourceAuthMethodsBodySchema = z.object({
     pincode: z
         .string()
         .regex(/^\d{6}$/)

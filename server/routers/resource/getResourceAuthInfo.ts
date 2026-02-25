@@ -16,7 +16,7 @@ import { fromError } from "zod-validation-error";
 import logger from "@server/logger";
 import { build } from "@server/build";
 
-const getResourceAuthInfoSchema = z.strictObject({
+const getResourceAuthInfoSchema = z.object({
     resourceGuid: z.string()
 });
 

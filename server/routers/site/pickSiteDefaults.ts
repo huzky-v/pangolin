@@ -44,7 +44,7 @@ registry.registerPath({
     responses: {}
 });
 
-const pickSiteDefaultsSchema = z.strictObject({
+const pickSiteDefaultsSchema = z.object({
     orgId: z.string()
 });
 

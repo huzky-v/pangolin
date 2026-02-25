@@ -15,7 +15,7 @@ import { FeatureId } from "@server/lib/billing";
 import { calculateUserClientsForOrgs } from "@server/lib/calculateUserClientsForOrgs";
 import { build } from "@server/build";
 
-const acceptInviteBodySchema = z.strictObject({
+const acceptInviteBodySchema = z.object({
     token: z.string(),
     inviteId: z.string()
 });

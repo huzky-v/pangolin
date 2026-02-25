@@ -24,7 +24,7 @@ import { OpenAPITags, registry } from "@server/openApi";
 import { OlmErrorCodes } from "../olm/error";
 import { sendTerminateClient } from "../client/terminate";
 
-const deleteOrgSchema = z.strictObject({
+const deleteOrgSchema = z.object({
     orgId: z.string()
 });
 

@@ -16,9 +16,9 @@ import { UserType } from "@server/types/UserTypes";
 import { verifySession } from "@server/auth/sessions/verifySession";
 import config from "@server/lib/config";
 
-export const requestTotpSecretBody = z.strictObject({
+export const requestTotpSecretBody = z.object({
     password: z.string(),
-    email: z.email().optional()
+    email: z.string().email().optional()
 });
 
 export type RequestTotpSecretBody = z.infer<typeof requestTotpSecretBody>;

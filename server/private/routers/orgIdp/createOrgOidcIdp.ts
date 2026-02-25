@@ -29,14 +29,14 @@ import { isSubscribed } from "#private/lib/isSubscribed";
 import { tierMatrix } from "@server/lib/billing/tierMatrix";
 import privateConfig from "#private/lib/config";
 
-const paramsSchema = z.strictObject({ orgId: z.string().nonempty() });
+const paramsSchema = z.object({ orgId: z.string().nonempty() });
 
-const bodySchema = z.strictObject({
+const bodySchema = z.object({
     name: z.string().nonempty(),
     clientId: z.string().nonempty(),
     clientSecret: z.string().nonempty(),
-    authUrl: z.url(),
-    tokenUrl: z.url(),
+    authUrl: z.string().url(),
+    tokenUrl: z.string().url(),
     identifierPath: z.string().nonempty(),
     emailPath: z.string().optional(),
     namePath: z.string().optional(),

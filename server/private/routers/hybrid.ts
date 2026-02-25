@@ -83,70 +83,70 @@ import { maxmindAsnLookup } from "@server/db/maxmindAsn";
 import { checkOrgAccessPolicy } from "@server/lib/checkOrgAccessPolicy";
 
 // Zod schemas for request validation
-const getResourceByDomainParamsSchema = z.strictObject({
+const getResourceByDomainParamsSchema = z.object({
     domain: z.string().min(1, "Domain is required")
 });
 
-const getUserSessionParamsSchema = z.strictObject({
+const getUserSessionParamsSchema = z.object({
     userSessionId: z.string().min(1, "User session ID is required")
 });
 
-const getUserOrgRoleParamsSchema = z.strictObject({
+const getUserOrgRoleParamsSchema = z.object({
     userId: z.string().min(1, "User ID is required"),
     orgId: z.string().min(1, "Organization ID is required")
 });
 
-const getUserOrgSessionVerifySchema = z.strictObject({
+const getUserOrgSessionVerifySchema = z.object({
     userId: z.string().min(1, "User ID is required"),
     orgId: z.string().min(1, "Organization ID is required"),
     sessionId: z.string().min(1, "Session ID is required")
 });
 
-const getRoleResourceAccessParamsSchema = z.strictObject({
+const getRoleResourceAccessParamsSchema = z.object({
     roleId: z
         .string()
         .transform(Number)
-        .pipe(z.int().positive("Role ID must be a positive integer")),
+        .pipe(z.number().int().positive("Role ID must be a positive integer")),
     resourceId: z
         .string()
         .transform(Number)
-        .pipe(z.int().positive("Resource ID must be a positive integer"))
+        .pipe(z.number().int().positive("Resource ID must be a positive integer"))
 });
 
-const getUserResourceAccessParamsSchema = z.strictObject({
+const getUserResourceAccessParamsSchema = z.object({
     userId: z.string().min(1, "User ID is required"),
     resourceId: z
         .string()
         .transform(Number)
-        .pipe(z.int().positive("Resource ID must be a positive integer"))
+        .pipe(z.number().int().positive("Resource ID must be a positive integer"))
 });
 
-const getResourceRulesParamsSchema = z.strictObject({
+const getResourceRulesParamsSchema = z.object({
     resourceId: z
         .string()
         .transform(Number)
-        .pipe(z.int().positive("Resource ID must be a positive integer"))
+        .pipe(z.number().int().positive("Resource ID must be a positive integer"))
 });
 
-const validateResourceSessionTokenParamsSchema = z.strictObject({
+const validateResourceSessionTokenParamsSchema = z.object({
     resourceId: z
         .string()
         .transform(Number)
-        .pipe(z.int().positive("Resource ID must be a positive integer"))
+        .pipe(z.number().int().positive("Resource ID must be a positive integer"))
 });
 
-const validateResourceSessionTokenBodySchema = z.strictObject({
+const validateResourceSessionTokenBodySchema = z.object({
     token: z.string().min(1, "Token is required")
 });
 
-const validateResourceAccessTokenBodySchema = z.strictObject({
+const validateResourceAccessTokenBodySchema = z.object({
     accessTokenId: z.string().optional(),
     resourceId: z.number().optional(),
     accessToken: z.string()
 });
 
 // Certificates by domains query validation
-const getCertificatesByDomainsQuerySchema = z.strictObject({
+const getCertificatesByDomainsQuerySchema = z.object({
     // Accept domains as string or array (domains or domains[])
     domains: z
         .union([z.array(z.string().min(1)), z.string().min(1)])
@@ -567,7 +567,7 @@ hybridRouter.get(
     }
 );
 
-const getOrgLoginPageParamsSchema = z.strictObject({
+const getOrgLoginPageParamsSchema = z.object({
     orgId: z.string().min(1)
 });
 
@@ -1254,7 +1254,7 @@ hybridRouter.post(
 );
 
 const geoIpLookupParamsSchema = z.object({
-    ip: z.union([z.ipv4(), z.ipv6()])
+    ip: z.union([z.string().ip({ version: "v4" }), z.string().ip({ version: "v6" })])
 });
 hybridRouter.get(
     "/geoip/:ip",
@@ -1318,7 +1318,7 @@ hybridRouter.get(
 );
 
 const asnIpLookupParamsSchema = z.object({
-    ip: z.union([z.ipv4(), z.ipv6()])
+    ip: z.union([z.string().ip({ version: "v4" }), z.string().ip({ version: "v6" })])
 });
 hybridRouter.get(
     "/asnip/:ip",

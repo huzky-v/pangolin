@@ -9,12 +9,12 @@ import createHttpError from "http-errors";
 import logger from "@server/logger";
 import { fromError } from "zod-validation-error";
 
-const removeUserSiteParamsSchema = z.strictObject({
+const removeUserSiteParamsSchema = z.object({
     userId: z.string()
 });
 
-const removeUserSiteSchema = z.strictObject({
-    siteId: z.int().positive()
+const removeUserSiteSchema = z.object({
+    siteId: z.number().int().positive()
 });
 
 export async function removeUserSite(
