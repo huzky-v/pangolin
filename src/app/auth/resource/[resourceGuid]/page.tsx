@@ -1,3 +1,4 @@
+import { connection } from "next/server";
 import {
     GetResourceAuthInfoResponse,
     GetExchangeTokenResponse
@@ -6,7 +7,6 @@ import ResourceAuthPortal from "@app/components/ResourceAuthPortal";
 import { formatAxiosError, internal, priv } from "@app/lib/api";
 import { AxiosResponse } from "axios";
 import { authCookieHeader } from "@app/lib/api/cookies";
-import { cache } from "react";
 import { verifySession } from "@app/lib/auth/verifySession";
 import { redirect } from "next/navigation";
 import ResourceNotFound from "@app/components/ResourceNotFound";
@@ -29,6 +29,8 @@ import { isOrgSubscribed } from "@app/lib/api/isOrgSubscribed";
 import { normalizePostAuthPath } from "@server/lib/normalizePostAuthPath";
 
 export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+export const revalidate = 0;
 
 export default async function ResourceAuthPage(props: {
     params: Promise<{ resourceGuid: number }>;
@@ -37,6 +39,8 @@ export default async function ResourceAuthPage(props: {
         token: string | undefined;
     }>;
 }) {
+    await connection();
+
     const params = await props.params;
     const searchParams = await props.searchParams;
 
@@ -210,12 +214,9 @@ export default async function ResourceAuthPage(props: {
     let loginIdps: LoginFormIDP[] = [];
     if (build === "saas" || env.app.identityProviderMode === "org") {
         if (subscribed) {
-            const idpsRes = await cache(
-                async () =>
-                    await priv.get<AxiosResponse<ListOrgIdpsResponse>>(
-                        `/org/${authInfo!.orgId}/idp`
-                    )
-            )();
+            const idpsRes = await priv.get<AxiosResponse<ListOrgIdpsResponse>>(
+                `/org/${authInfo.orgId}/idp`
+            );
             loginIdps = idpsRes.data.data.idps.map((idp) => ({
                 idpId: idp.idpId,
                 name: idp.name,

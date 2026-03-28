@@ -17,7 +17,7 @@ import rateLimit, { ipKeyGenerator } from "express-rate-limit";
 import createHttpError from "http-errors";
 import HttpCode from "./types/HttpCode";
 import requestTimeoutMiddleware from "./middlewares/requestTimeout";
-import { createStore } from "#dynamic/lib/rateLimitStore";
+import { getStore } from "#dynamic/lib/rateLimitStore";
 import { stripDuplicateSesions } from "./middlewares/stripDuplicateSessions";
 import { corsWithLoginPageSupport } from "@server/lib/corsWithLoginPage";
 import { hybridRouter } from "#dynamic/routers/hybrid";
@@ -101,7 +101,7 @@ export function createApiServer() {
                         createHttpError(HttpCode.TOO_MANY_REQUESTS, message)
                     );
                 },
-                store: createStore()
+                store: getStore()
             })
         );
     }

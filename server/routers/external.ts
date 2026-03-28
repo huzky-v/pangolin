@@ -48,7 +48,7 @@ import { ActionsEnum } from "@server/auth/actions";
 import rateLimit, { ipKeyGenerator } from "express-rate-limit";
 import createHttpError from "http-errors";
 import { build } from "@server/build";
-import { createStore } from "#dynamic/lib/rateLimitStore";
+import { getStore } from "#dynamic/lib/rateLimitStore";
 import { logActionAudit } from "#dynamic/middlewares";
 import { checkRoundTripMessage } from "./ws";
 
@@ -1136,7 +1136,7 @@ authRouter.use(
             const message = `Rate limit exceeded. You can make ${config.getRawConfig().rate_limits.auth.max_requests} requests every ${config.getRawConfig().rate_limits.auth.window_minutes} minute(s).`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     })
 );
 
@@ -1151,7 +1151,7 @@ authRouter.put(
             const message = `You can only sign up ${15} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     auth.signup
 );
@@ -1166,7 +1166,7 @@ authRouter.post(
             const message = `You can only log in ${15} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     auth.login
 );
@@ -1183,7 +1183,7 @@ authRouter.post(
             const message = `You can only lookup users ${15} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     auth.lookupUser
 );
@@ -1198,7 +1198,7 @@ authRouter.post(
             const message = `You can only request a Newt token ${900} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     newt.getNewtToken
 );
@@ -1213,7 +1213,7 @@ authRouter.post(
             const message = `You can only request an Olm token ${900} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     olm.getOlmToken
 );
@@ -1230,7 +1230,7 @@ authRouter.post(
             const message = `You can only enable 2FA ${15} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     auth.verifyTotp
 );
@@ -1246,7 +1246,7 @@ authRouter.post(
             const message = `You can only request a 2FA code ${15} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     auth.requestTotpSecret
 );
@@ -1262,7 +1262,7 @@ authRouter.post(
             const message = `You can only disable 2FA ${15} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     auth.disable2fa
 );
@@ -1277,7 +1277,7 @@ authRouter.post(
             const message = `You can only sign up ${15} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     verifySessionMiddleware,
     auth.verifyEmail
@@ -1295,7 +1295,7 @@ authRouter.post(
             const message = `You can only request an email verification code ${15} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     auth.requestEmailVerificationCode
 );
@@ -1317,7 +1317,7 @@ authRouter.post(
             const message = `You can only request a password reset ${15} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     auth.requestPasswordReset
 );
@@ -1333,7 +1333,7 @@ authRouter.post(
             const message = `You can only request a password reset ${15} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     auth.resetPassword
 );
@@ -1349,7 +1349,7 @@ authRouter.post(
             const message = `You can only authenticate with password ${15} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     resource.authWithPassword
 );
@@ -1364,7 +1364,7 @@ authRouter.post(
             const message = `You can only authenticate with pincode ${15} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     resource.authWithPincode
 );
@@ -1380,7 +1380,7 @@ authRouter.post(
             const message = `You can only request an email OTP ${15} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     resource.authWithWhitelist
 );
@@ -1413,7 +1413,7 @@ authRouter.post(
             const message = `You can only register a security key ${5} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     auth.startRegistration
 );
@@ -1434,7 +1434,7 @@ authRouter.post(
             const message = `You can only attempt security key authentication ${10} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     auth.startAuthentication
 );
@@ -1456,7 +1456,7 @@ authRouter.delete(
             const message = `You can only delete a security key ${10} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     auth.deleteSecurityKey
 );
@@ -1472,7 +1472,7 @@ authRouter.post(
             const message = `You can only request a device auth code ${30} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     auth.startDeviceWebAuth
 );
@@ -1488,7 +1488,7 @@ authRouter.get(
             const message = `You can only poll a device auth code ${60} times per minute. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     auth.pollDeviceWebAuth
 );
@@ -1504,7 +1504,7 @@ authenticated.post(
             const message = `You can only verify a device auth code ${50} times every ${15} minutes. Please try again later.`;
             return next(createHttpError(HttpCode.TOO_MANY_REQUESTS, message));
         },
-        store: createStore()
+        store: getStore()
     }),
     auth.verifyDeviceWebAuth
 );

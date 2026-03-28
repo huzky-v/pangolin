@@ -1,3 +1,4 @@
+import { connection } from "next/server";
 import ThemeSwitcher from "@app/components/ThemeSwitcher";
 import { Separator } from "@app/components/ui/separator";
 import { priv } from "@app/lib/api";
@@ -7,7 +8,10 @@ import { GetLicenseStatusResponse } from "@server/routers/license/types";
 import { AxiosResponse } from "axios";
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-import { cache } from "react";
+
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+export const revalidate = 0;
 
 export const metadata: Metadata = {
     title: `Auth - ${process.env.BRANDING_APP_NAME || "Pangolin"}`,
@@ -19,18 +23,18 @@ type AuthLayoutProps = {
 };
 
 export default async function AuthLayout({ children }: AuthLayoutProps) {
+    await connection();
+
     const env = pullEnv();
     const t = await getTranslations();
     let hideFooter = false;
 
     let licenseStatus: GetLicenseStatusResponse | null = null;
-    if (build == "enterprise") {
-        const licenseStatusRes = await cache(
-            async () =>
-                await priv.get<AxiosResponse<GetLicenseStatusResponse>>(
-                    "/license/status"
-                )
-        )();
+    if (build === "enterprise") {
+        const licenseStatusRes =
+            await priv.get<AxiosResponse<GetLicenseStatusResponse>>(
+                "/license/status"
+            );
         licenseStatus = licenseStatusRes.data.data;
         if (
             env.branding.hideAuthLayoutFooter &&

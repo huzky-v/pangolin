@@ -1,3 +1,4 @@
+import { connection } from "next/server";
 import { verifySession } from "@app/lib/auth/verifySession";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -19,10 +20,14 @@ import { LoginFormIDP } from "@app/components/LoginForm";
 import { ListIdpsResponse } from "@server/routers/idp";
 
 export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+export const revalidate = 0;
 
 export default async function Page(props: {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
+    await connection();
+
     const searchParams = await props.searchParams;
     const getUser = cache(verifySession);
     const user = await getUser({ skipCheckVerifyEmail: true });
@@ -83,10 +88,8 @@ export default async function Page(props: {
     if (!useSmartLogin) {
         // Load IdPs for DashboardLoginForm (OSS or org-only IdP mode)
         if (build === "oss" || env.app.identityProviderMode !== "org") {
-            const idpsRes = await cache(
-                async () =>
-                    await priv.get<AxiosResponse<ListIdpsResponse>>("/idp")
-            )();
+            const idpsRes =
+                await priv.get<AxiosResponse<ListIdpsResponse>>("/idp");
             loginIdps = idpsRes.data.data.idps.map((idp) => ({
                 idpId: idp.idpId,
                 name: idp.name,

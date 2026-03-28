@@ -23,7 +23,9 @@ export async function createNextServer() {
 
     nextServer.all("/{*splat}", (req, res) => {
         const parsedUrl = parse(req.url!, true);
-        return handle(req, res, parsedUrl);
+        return handle(req, res, parsedUrl).finally(() => {
+            delete (global as any).__incrementalCache;
+        });
     });
 
     nextServer.listen(nextPort, (err?: any) => {
